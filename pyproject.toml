@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools >= 65.5.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "322"
+dynamic = ["version"]
+requires-python = ">= 3.11"
+authors = [ # put your name, email here!
+    {name = "Gavin Travis", email = "gavin.travis@wsu.edu"},
+]
+dependencies = [
+    "requests"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pre-commit",
+    "ruff",
+    "black",
+    "isort",
+]
