@@ -20,3 +20,8 @@ dev = [
     "black",
     "isort",
 ]
+
+[tool.ruff]
+line-length = 80 # max line length
+select = "ALL" # enable all rules for now, we can peel back the ones we dont like as we go!
+exclude = [".venv", "*.md", ".egg*", ".git", ".gitignore"] # stuff not to lint + format
