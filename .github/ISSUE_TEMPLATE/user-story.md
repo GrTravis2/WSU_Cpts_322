@@ -16,7 +16,13 @@ assignees: ''
 ## Acceptance Criteria
 
 ```gherkin
-Given [some context]
-When [certain action is taken]
-Then [the outcome of action is observed]
+Scenario 1: Positive Flow
+Given [initial context]
+When [action performed]
+Then [expected outcome]
+
+Scenario 2: Negative/Edge Case 
+Given [initial context]
+When [invalid/edge action]
+Then [expected outcome]
 ```
