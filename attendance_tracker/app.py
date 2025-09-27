@@ -6,8 +6,8 @@ from pathlib import Path
 
 from flask import Flask
 
-from attendance_tracker.controllers.analytics import ANALYTICS_BP
-from attendance_tracker.controllers.ingest import INGEST_BP
+from attendance_tracker.controllers.analytics import ANALYTICS
+from attendance_tracker.controllers.ingest import INGEST
 
 
 def create_app() -> Flask:
@@ -19,7 +19,11 @@ def create_app() -> Flask:
         DATABASE=Path("attendance_tracker/REPLACE_ME_LATER"),
     )
 
-    app.register_blueprint(INGEST_BP)
-    app.register_blueprint(ANALYTICS_BP)
+    app.register_blueprint(INGEST)
+    app.register_blueprint(ANALYTICS)
+
+    @app.route("/")
+    def hello():
+        return "Hello, World"
 
     return app

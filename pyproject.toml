@@ -22,6 +22,7 @@ dev = [
     "black",
     "isort",
     "pyright",
+    "pytailwindcss",
 ]
 
 [tool.setuptools.packages.find]
