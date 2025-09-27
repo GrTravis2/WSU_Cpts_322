@@ -13,3 +13,10 @@
 6. **Enable pre-commit hooks with `pre-commit install`**, _this step is critical otherwise tools will not be enabled to validate git commits!!!_
 7. Once installed, make sure pre-commit is doing stuff with command `pre-commit run`
 8. Start building!
+
+## Helpful Scripts
+shell scripts located in ./tools directory
+
+| Script Name | Function | Arguments |
+| --- | --- | :---: |
+| `start_server` | starts the flask web app in debug mode | n/a |
