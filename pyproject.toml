@@ -10,7 +10,9 @@ authors = [ # put your name, email here!
     {name = "Gavin Travis", email = "gavin.travis@wsu.edu"},
 ]
 dependencies = [
-    "requests"
+    "requests",
+    "flask",
+    "Jinja2",
 ]
 
 [project.optional-dependencies]
@@ -19,9 +21,16 @@ dev = [
     "ruff",
     "black",
     "isort",
+    "pyright",
 ]
+
+[tool.setuptools.packages.find]
+where = ["attendance_tracker"]
 
 [tool.ruff]
 line-length = 80 # max line length
-select = "ALL" # enable all rules for now, we can peel back the ones we dont like as we go!
+select = ["ALL"] # enable all rules for now, we can peel back the ones we dont like as we go!
 exclude = [".venv", "*.md", ".egg*", ".git", ".gitignore"] # stuff not to lint + format
+
+[tool.pyright]
+venvPath = "."
