@@ -1,17 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <nav>
-        {# structure of the navigation menu tbd#}
-    </nav>
-    {% block head %}
-    <link rel="stylesheet" href="style.css"/>
-    <title> {# child templates can replace title #}
-        {% block title %} Title {% endblock %}
-    </title>
-    {% endblock %}
+    <title>{% block title %}Attendance Tracker{% endblock %}</title>
+        <link href="{{ url_for('static', filename='output.css') }}" rel="stylesheet">
 </head>
 <body>
-    {% block content %} content of the webpage {% endblock %}
+    <div id="content">{% block content %}{% endblock %}</div>
+
+    <div id="footer">{% block footer %}{% endblock %}
+    </div>
 </body>
 </html>
