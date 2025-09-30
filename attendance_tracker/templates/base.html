@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <nav>
+        {# structure of the navigation menu tbd#}
+    </nav>
+    {% block head %}
+    <link rel="stylesheet" href="style.css"/>
+    <title> {# child templates can replace title #}
+        {% block title %} Title {% endblock %}
+    </title>
+    {% endblock %}
+</head>
+<body>
+    {% block content %} content of the webpage {% endblock %}
+</body>
+</html>
