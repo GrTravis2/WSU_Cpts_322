@@ -8,3 +8,6 @@ temp.py
 
 # dont commit MacOS files
 .DS_Store
+
+# dont commit generated css page stuff
+attendance_tracker/static/*
