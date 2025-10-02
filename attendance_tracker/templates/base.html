@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full">
     <head>
-        <title>{% block title %}Attendance Tracker{% endblock %}</title>
+        <!-- Title of the individual page (appears in tab) -->
+        <title>{% block title %}{{title}}{% endblock %}</title>
             <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
     </head>
     <body class="bg-cougGray text-white flex-col min-h-screen">
@@ -28,6 +29,10 @@
         </nav>
 
         <!-- Page specific content -->
+
+        <!-- Individual page name -->
+        <h1>{% block name %}{{name}}{% endblock %}</h1>
+
         <main class="flex-grow pt-20 text-3xl">
             {% block content %}
                 {# content goes here #}

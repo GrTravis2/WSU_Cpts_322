@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+@theme
+{
+    --color-cougCrimson: #A60F2D;
+    --color-cougRed: #CA1237;
+    --color-cougGray: #4D4D4D;
+    --font-sans: "Proxima Nova", sans-serif
+}
