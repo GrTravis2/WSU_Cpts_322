@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %} Data View {% endblock %}
+
+{% block content %}
+<body>
+    <div style="width: 800px;">
+        <canvas id="data-view" data="{{ chart_config }}" | tojson>
+        </canvas>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <form action="/h/analytics/data-view" method="post">
+        <label for="room-select">Choose a room:</label>
+        <select name="room" id="room-select">
+        <option value="">--Please choose an option--</option>
+        {% for room in rooms | sort %}
+            <option>{{ room }}</option>
+        {% endfor %}
+        </select>
+        <p>
+        <label for="duration-select">Choose a time period:</label>
+        <select name="duration" id="duration-select">
+        <option value="">--Please choose an option--</option>
+            <option>last week</option>
+            <option>last month</option>
+            <option>last three months</option>
+        </select>
+        </p>
+        <p class="button">
+            <button type="submit">Submit</button>
+        </p>
+    </form>
+</body>
+<script>
+    const ctx = document.getElementById("data-view");
+    cfg = JSON.parse(ctx.getAttribute("data"));
+    new Chart(ctx, cfg);
+</script>
+{% endblock %}
