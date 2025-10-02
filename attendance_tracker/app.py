@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from flask import Flask
+from flask import Flask, render_template
 
 from attendance_tracker.controllers.admin import ADMIN
 from attendance_tracker.controllers.analytics import ANALYTICS
@@ -27,7 +27,7 @@ def create_app() -> Flask:
     app.register_blueprint(INGEST)
 
     @app.route("/")
-    def hello():
-        return "Hello, World"
+    def index():
+        return render_template("index.html", name="INDEX", title="HOMEPAGE")
 
     return app
