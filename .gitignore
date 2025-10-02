@@ -6,8 +6,5 @@
 # dont commit empty script for testing stuff
 temp.py
 
-# dont commit a bunch of NodeJS stuff
-attendance_tracker/node_modules
-
 # dont commit MacOS files
 .DS_Store
