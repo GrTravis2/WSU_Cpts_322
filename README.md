@@ -19,4 +19,4 @@ shell scripts located in ./tools directory
 
 | Script Name | Function | Arguments |
 | --- | --- | :---: |
-| `start_server` | starts the flask web app in debug mode | n/a |
+| `start_server` | starts the flask web app in debug mode | - |

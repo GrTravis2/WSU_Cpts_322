@@ -10,9 +10,8 @@ INGEST = flask.Blueprint(
     url_prefix="/j/ingest",
 )
 
-INGEST.route("/upload-activity", methods=("POST"))
 
-
+@INGEST.route("/upload-activity", methods=["POST"])
 def upload_activity() -> flask.Response:
     """Club activity JSON sent to this URL to be stored in the app."""
     raise NotImplementedError
