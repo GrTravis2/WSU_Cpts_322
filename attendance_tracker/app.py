@@ -5,7 +5,7 @@ from __future__ import annotations
 import sqlite3
 from pathlib import Path
 
-from flask import Flask, current_app, g
+from flask import Flask, current_app, g, render_template
 
 from attendance_tracker.controllers.admin import ADMIN
 from attendance_tracker.controllers.analytics import ANALYTICS
@@ -51,8 +51,7 @@ def create_app() -> Flask:
     app.register_blueprint(INGEST)
 
     @app.route("/")
-    def hello():
-        db: sqlite3.Connection = get_db()
-        return f"Hello, World and db changes: {db.total_changes}"
+    def index():
+        return render_template("index.html", name="INDEX", title="HOMEPAGE")
 
     return app

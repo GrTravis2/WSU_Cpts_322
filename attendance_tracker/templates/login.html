@@ -1,17 +1,36 @@
 {% extends "base.html" %}
-{% block title %} Login {% endblock %}
 
+<!-- Page title -->
+{% block title %}{{title}}{% endblock %}
+
+<!-- Page content -->
 {% block content %}
+<div class="min-h-screen flex items-center justify-center p-4">
+  <div class="max-w-md w-full bg-white rounded-xl shadow-lg p-8">
+    <h2 class="text-2xl text-gray-900 mb-6 text-center">Sign In</h2>
 
-{# super basic login form #}
-<h1>Login screen</h1>
-<form method="POST">
-    <label>Username</label><br>
-    <input type="text" name="username" required><br>
+    <!-- Form -->
+    <form class="space-y-4">
+      <!-- Username/ID/Email, whatever we end up going with -->
+      <div>
+        <label class="block text-sm font-[Proxima Nova] text-gray-700 mb-1">User ID</label>
+        <input type="userID" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cougRed focus:border-cougCrimson outline-none transition-all" placeholder="000000000"/>
+      </div>
 
-    <label>Password</label><br>
-    <input type="text" name="password" required><br>
+      <!-- Password -->
+      <div>
+        <label class="block text-sm font-[Proxima Nova] text-gray-700 mb-1">Password</label>
+        <input type="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cougRed focus:border-cougCrimson outline-none transition-all" placeholder="HuskiesStink1234#"/>
+      </div>
 
-    <button type="submit">Login</button>
-</form>
+      <!-- Sign in button -->
+      <div class="flex items-center justify-between">
+        <button class="w-full bg-cougCrimson hover:bg-cougRed text-white font-[Proxima Nova] py-2.5 rounded-lg transition-colors">Sign In</button>
+      </div>
+    </form>
+
+    <!-- Not registered prompt - will eventually lead to user reg -->
+    <div class="mt-6 text-center text-sm text-gray-600">Not registered?<a href="#" class="text-cougCrimson hover:text-cougRed font-medium">Sign up</a></div>
+  </div>
+</div>
 {% endblock %}
