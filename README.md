@@ -20,3 +20,4 @@ shell scripts located in ./tools directory
 | Script Name | Function | Arguments |
 | --- | --- | :---: |
 | `start_server` | starts the flask web app in debug mode | - |
+| `tailwindcss` | start tail wind with input/output css file path fixed | append any args like `--watch` for watch mode |
