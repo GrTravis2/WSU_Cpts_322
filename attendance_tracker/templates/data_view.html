@@ -3,32 +3,46 @@
 
 {% block content %}
 <body>
-    <div style="width: 800px;">
-        <canvas id="data-view" data="{{ chart_config }}" | tojson>
+    <div class="flex items-center justify-center p-4">
+        <canvas id="data-view" data="{{ chart_config }}" | tojson class="bg-white shadow rounded-lg p-4 sm:p-5">
         </canvas>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <form action="/h/analytics/data-view" method="post">
-        <label for="room-select">Choose a room:</label>
-        <select name="room" id="room-select">
-        <option value="">--Please choose an option--</option>
-        {% for room in rooms | sort %}
-            <option>{{ room }}</option>
-        {% endfor %}
-        </select>
-        <p>
-        <label for="duration-select">Choose a time period:</label>
-        <select name="duration" id="duration-select">
-        <option value="">--Please choose an option--</option>
-            <option>last week</option>
-            <option>last month</option>
-            <option>last three months</option>
-        </select>
-        </p>
-        <p class="button">
-            <button type="submit">Submit</button>
-        </p>
-    </form>
+
+    <div>
+        <div class="flex items-center justify-center p-4">
+            <form action="/h/analytics/data-view" method="post">
+
+                <!-- Room selections -->
+                <div class="bg-white text-black border rounded-lg">
+                    <label for="room-select" class="block text-sm font-medium text-white dark:text-gray-200">Choose a room:</label>
+                    <select name="room" id="room-select">
+                        <option value="" class="mt-1.5 w-full rounded-lg border bg-white">Choose a room</option>
+                                {% for room in rooms | sort %}
+                                    <option>{{ room }}</option>
+                                {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Timeframe options -->
+                <div class="bg-white text-black border rounded-lg">
+                    <label for="duration-select" class="block text-sm font-medium text-white dark:text-gray-200">Choose a time period:</label>
+                    <select name="duration" id="duration-select">
+                        <option class="mt-1.5 w-full rounded-lg border bg-white" value="">Choose a timeframe</option>
+                            <option>last week</option>
+                            <option>last month</option>
+                            <option>last three months</option>
+                    </select>
+                </div>
+
+                <!-- Button -->
+                <div class="button bg-cougCrimson text-white border rounded-lg py-2">
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
 </body>
 <script>
     const ctx = document.getElementById("data-view");
