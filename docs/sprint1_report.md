@@ -1,5 +1,5 @@
 # Sprint x Report
-Video Link:  ==DO NOT FORGET TO UPDATE==
+Video Link: [Sprint 1 presentation](https://youtu.be/8EqE3Tuetlg)
 ## What's New (User Facing)
 * Web app navigation bar
 * Web app data visualization page
@@ -7,13 +7,6 @@ Video Link:  ==DO NOT FORGET TO UPDATE==
 ## Work Summary (Developer Facing)
 This initial sprint was primarily focused on setting up the foundation of the application, including laying out the structure and design of the website and database. Additionally, many new developer tools were implemented that enforce code style, python project structure, and python type correctness all of which simplify the process of creating new features! As mentioned previously, all of this work culminated in several user facing features that map to project functional requirements. In tandem with the software development side of the project, the team has also made strides to interact with customers to request real life data and testing. These efforts include two meetings with WSU club administrators and WSU IT members. Through this process the team has also established an email chain that will be used to ask more questions and request more data when required. Overall, The `__init__` to win it team has made lots of progress on the project, while there are currently only a few customer facing features available the team is set up well for success in future sprints!
 ## Unfinished Work
-If applicable, explain the work you did not finish in this sprint. For issues/user
-stories in the current sprint that have not been closed, (a) any progress toward
-completion of the issues has been clearly tracked (by checking the checkboxes of
-acceptance criteria), (b) a comment has been added to the issue to explain why the
-issue could not be completed (e.g., "we ran out of time" or "we did not anticipate
-it would be so much work"), and (c) the issue is added to a subsequent sprint, so
-that it can be addressed later.
 
 While the team was successful in shipping several basic features there were a handful of features expected to be completed during sprint 1 that were not completed. These tasks linked below in the incomplete user stories sections were blocked by a common issue in that the data input for the project has not been finalized yet. Since the attendance tracker project is going to process and present real data the steps required to get access to this data has taken longer than anticipated. The team currently has access to a basic schema for activity event data and room assignments, however the exact format is still being reviewed by customers. To minimize rework the team has decided to delay these tasks until the customer is less likely to change the form of the data! These decisions have resulted in other tasks that were expected to be completed in sprint 2 be moved forward into sprint 1 so the surprise delay has not changed the throughput of the team this sprint, it has only changed the features that are available. One other detail to note is that since the activity data is derived from sensitive information (student id) the method for transferring data from school IT services to the attendance tracker project has to be carefully considered by the customer. These extra precautions while very important for data privacy have resulted in increased delays.
 ## Completed Issues/User Stories
@@ -36,13 +29,7 @@ Here are links to the issues that we completed in this sprint:
 | Ingrid      | 5                       |
 | Gavin       | 9                       |
 **Footnote: Dylan put lots of time and effort in communicating with customers, story points do not capture the whole picture for tasks related to customer involvement**
- Desirables (Remove this section when you save the file):
-* Each issue should be assigned to a milestone
-* Each completed issue should be assigned to a pull request
-* Each completed pull request should include a link to a "Before and After" video
-* All team members who contributed to the issue should be assigned to it on GitHub
-* Each issue should be assigned story points using a label
-* Story points contribution of each team member should be indicated in a comment
+
 ## Incomplete Issues/User Stories
 Here are links to issues we worked on but did not complete in this sprint:
 * [Make sure a room has a club assigned before accepting user data](https://github.com/users/GrTravis2/projects/5/views/1?pane=issue&itemId=128355247&issue=GrTravis2%7CWSU_Cpts_322%7C3)
@@ -54,11 +41,6 @@ Here are links to issues we worked on but did not complete in this sprint:
 
 **See unfinished work section and issue posts for more details on why the features were not completed.**
 
-Examples of explanations (Remove this section when you save the file):
-* "We ran into a complication we did not anticipate (explain briefly)."
-* "We decided that the feature did not add sufficient value for us to work on it in this sprint (explain briefly)."
-* "We could not reproduce the bug" (explain briefly).
-* "We did not get to this issue because..." (explain briefly)
 ## Code Files for Review
 Please review the following code files, which were actively developed during this
 sprint, for quality:
