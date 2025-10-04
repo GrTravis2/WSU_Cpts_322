@@ -85,4 +85,5 @@ Here are changes we plan to implement in the next sprint:
 * Finalize sprint plan early and do not deviate unless absolutely necessary
 * Reduce task scope until there is no chance of two tasks overlapping
 * Fully complete sprint planning before starting development, try not to add many tasks during the sprint
-* For understanding customer needs and other external services/requirements, make sure the right stakeholders are in the meeting.
+* For understanding customer needs and other external services/requirements, make sure the right stakeholders are in the meeting
+* Record team member responsibilities and tasks funnels so that there is always a next task ready
