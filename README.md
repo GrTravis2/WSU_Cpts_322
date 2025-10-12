@@ -21,3 +21,4 @@ shell scripts located in ./tools directory
 | --- | --- | :---: |
 | `start_server` | starts the flask web app in debug mode | - |
 | `tailwindcss` | start tail wind with input/output css file path fixed | append any args like `--watch` for watch mode |
+| `flask -- app attendance_tracker init-db` | deletes tables and recreates schema from scratch | - |
