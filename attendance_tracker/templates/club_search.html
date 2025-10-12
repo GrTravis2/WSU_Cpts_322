@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %} Clubs {% endblock %}
+
+{% block content %}
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">Building</th>
+                <th scope="col">Room Number</th>
+                <th scope="col">Assigned Club</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for building, room, club in clubs %}
+            <tr>
+                <th scope="row">{{building}}</th>
+                <th>{{room}}</th>
+                <th>{{club}}</th>
+                <th><a href="/{{club}}/club-config">edit</a></th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

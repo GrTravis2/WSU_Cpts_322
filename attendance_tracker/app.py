@@ -12,7 +12,6 @@ from attendance_tracker.controllers.analytics import ANALYTICS
 from attendance_tracker.controllers.auth import AUTH
 from attendance_tracker.controllers.ingest import INGEST
 
-
 def get_db() -> sqlite3.Connection:
     """Create connection to db, called at each request."""
     if "db" not in g:
