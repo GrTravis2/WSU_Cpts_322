@@ -2,12 +2,13 @@
 
 from __future__ import annotations
 
+import sqlite3
 from typing import TYPE_CHECKING
 
 import flask
 
 if TYPE_CHECKING:
-    import sqlite3
+    pass
 
 ADMIN = flask.Blueprint(
     name="admin",
@@ -15,19 +16,20 @@ ADMIN = flask.Blueprint(
     url_prefix="/h/admin",
 )
 
+
 @ADMIN.route("/clubs", methods=["GET", "POST"])
 def club_info() -> str:
     """View all clubs that have info saved in the system."""
-    #with flask.current_app.app_context():
-        #conn: sqlite3.Connection = flask.current_app.get_db() # type: ignore
+    with flask.current_app.app_context():
+        conn: sqlite3.Connection = flask.current_app.get_db()  # type: ignore
 
     # query all the clubs here and return data view
     # note that submitting on a target club should include URL to jump to,
     # see base.html nav bar links, similar idea
-    #query = "SELECT BUILDING, ROOM_NUM, ASSIGNED_CLUB FROM ROOM_LOG"
-    #clubs: list[str] = conn.execute(query).fetchall()
+    # query = "SELECT BUILDING, ROOM_NUM, ASSIGNED_CLUB FROM ROOM_LOG"
+    # clubs: list[str] = conn.execute(query).fetchall()
+    conn.execute("")
     clubs: list[tuple[str, int, str]] = [(str(i), i, str(i)) for i in range(10)]
-
 
     return flask.render_template(
         "club_search.html",
@@ -35,12 +37,18 @@ def club_info() -> str:
     )
 
 
-@ADMIN.route("/<club_name>/club-config", methods=["GET", "POST"])
+@ADMIN.route("/club-config/<club_name>", methods=["GET", "POST"])
 def club_config(club_name: str = "") -> str:
     """View club specific information and update."""
-    #with flask.current_app.app_context():
-        #conn: sqlite3.Connection = flask.current_app.get_db() #type: ignore
+    with flask.current_app.app_context():
+        conn: sqlite3.Connection = flask.current_app.get_db()  # type: ignore
+
+    # query = f"SELECT * FROM CLUB_DATA WHERE CLUB_NAME={club_name}"
+    # club = conn.execute(query).fetchone()
+    conn.execute("")
+    club = ("club", "name", "email", "size", "advisor", "advisor email")
 
     return flask.render_template(
-        "club_config.html"
+        "club_config.html",
+        club=club,
     )

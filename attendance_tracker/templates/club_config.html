@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %} Clubs {% endblock %}
+
+{% block content %}
+<div>
+    <form>
+        {% for field in club %}
+        <div>
+            <label>{{field}}</label>
+        </div>
+        {% endfor %}
+    </form>
+</div>
+
+{% endblock %}
