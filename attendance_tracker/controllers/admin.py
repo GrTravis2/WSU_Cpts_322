@@ -3,12 +3,8 @@
 from __future__ import annotations
 
 import sqlite3
-from typing import TYPE_CHECKING
 
 import flask
-
-if TYPE_CHECKING:
-    pass
 
 ADMIN = flask.Blueprint(
     name="admin",
