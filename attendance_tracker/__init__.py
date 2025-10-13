@@ -5,6 +5,8 @@ import pathlib
 import sqlite3
 
 import click
+import pathlib
+
 import flask
 
 from attendance_tracker.app import AttendanceTracker
