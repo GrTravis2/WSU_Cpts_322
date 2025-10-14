@@ -13,8 +13,8 @@ CREATE TABLE CLUB_DATA (
 );
 
 CREATE TABLE INPUT_DATA (
-    room_num INTEGER,
     building TEXT,
+    room_num INTEGER,
     times_accessed INTEGER,
     access_succeed INTEGER,
     access_fail INTEGER,
@@ -23,9 +23,9 @@ CREATE TABLE INPUT_DATA (
 );
 
 CREATE TABLE ROOM_LOG (
-    room_num INTEGER,
     building TEXT,
+    room_num INTEGER,
     assigned_club TEXT,
-    PRIMARY KEY (room_num, building),
+    PRIMARY KEY (assigned_club),
     FOREIGN KEY (assigned_club) REFERENCES CLUB_DATA (club_name)
 );

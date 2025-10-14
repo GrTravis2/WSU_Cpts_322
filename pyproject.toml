@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "322"
 dynamic = ["version"]
-requires-python = ">= 3.11"
+requires-python = ">= 3.12"
 authors = [ # put your name, email here!
     {name = "Gavin Travis", email = "gavin.travis@wsu.edu"},
     {name = "Ingrid Llorente", email = "Ingrid.llorente@wsu.edu"}
