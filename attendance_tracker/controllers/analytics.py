@@ -67,8 +67,13 @@ def _create_line_chart(
             "datasets": [{"label": ""}],
         }
 
+    options = {  # adding these so the chart can be resized
+        "responsive": True,
+        "maintainAspectRatio": False,
+    }
+
     return _ChartJSConfig(
         type="line",
         data=data,
-        options={},  # no options rn
+        options=options,
     )
