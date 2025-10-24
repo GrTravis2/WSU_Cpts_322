@@ -23,3 +23,4 @@ shell scripts located in ./tools directory
 | `tailwindcss` | start tail wind with input/output css file path fixed | append any args like `--watch` for watch mode |
 | `flask --app attendance_tracker init-db` | deletes tables and recreates schema from scratch | - |
 | `flask --app attendance_tracker load-samples` | load sample csv data into tables and check number of rows inserted | - |
+| `flask --app attendance_tracker gen-sample-data` | creates sample csv data into /docs | - |
