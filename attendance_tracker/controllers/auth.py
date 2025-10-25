@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import functools
+import hashlib
 import sqlite3
 from typing import Callable
 
@@ -38,6 +39,7 @@ def login() -> str | flask.Response:
         with flask.current_app.app_context():
             conn: sqlite3.Connection = flask.current_app.get_db()  # type: ignore
         pw = flask.request.form.get("pw") or ""  # required
+        pw = hashlib.sha256(pw.encode(encoding="utf-8")).hexdigest()
 
         result = conn.execute(  # returns a singleton tuple with password_
             "SELECT password_ FROM auth WHERE username = ?", (un,)
@@ -82,6 +84,7 @@ def sign_up() -> str:
     query = "SELECT username FROM auth WHERE username = ?"
     r = conn.execute(query, (un,)).fetchone()
     if r is None:
+        pw = hashlib.sha256(pw.encode(encoding="utf-8")).hexdigest()
         query = "INSERT INTO auth (username, password_) VALUES (?, ?)"
         conn.execute(query, (un, pw)).fetchall()
         conn.commit()
@@ -92,7 +95,7 @@ def sign_up() -> str:
         "login.html",
         name="LOGIN PAGE",
         title="LOGIN VIEW",
-        action=f"{r}",
+        action="Register",
         username=un,
         authenticated=flask.session.get("uid") is not None,
     )

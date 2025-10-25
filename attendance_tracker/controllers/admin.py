@@ -17,7 +17,7 @@ ADMIN = flask.Blueprint(
 
 @ADMIN.route("/home", methods=["GET"])
 @auth.required
-def home() -> str | flask.Response | flask.wrappers.Response:
+def home() -> str | flask.Response:
     """Home page for navigating to admin functions."""
     return flask.render_template(
         "index.html",  # make actual home page later
