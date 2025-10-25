@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Assign club to room{% endblock %}
+{% block content %}
+    <div>
+        <form method="POST" action="/h/admin/assign-room-to-club">
+            <label for="building_name">Building name:</label><br>
+            <input type="text" name="building_name" id="building_name" required><br><br>
+
+             <label for="room_num">Room number:</label><br>
+            <input type="text" name="room_num" id="room_num" required><br><br>
+
+             <label for="assigned_club">Assigned club:</label><br>
+            <input type="text" name="assigned_club" id="assigned_club" required><br><br>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+{% endblock %}
