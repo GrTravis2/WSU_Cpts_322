@@ -40,7 +40,7 @@ def login() -> str | flask.Response:
         pw = flask.request.form.get("pw") or ""  # required
 
         result = conn.execute(  # returns a singleton tuple with password_
-            "SELECT password_ FROM AUTH WHERE username = ?", (un,)
+            "SELECT password_ FROM auth WHERE username = ?", (un,)
         ).fetchone()
         match result or None:
             case (actual_pw, *_) if actual_pw == pw:
@@ -79,10 +79,10 @@ def sign_up() -> str:
     with flask.current_app.app_context():
         conn: sqlite3.Connection = flask.current_app.get_db()  # type: ignore
 
-    query = "SELECT username FROM AUTH WHERE username = ?"
+    query = "SELECT username FROM auth WHERE username = ?"
     r = conn.execute(query, (un,)).fetchone()
     if r is None:
-        query = "INSERT INTO AUTH (username, password_) VALUES (?, ?)"
+        query = "INSERT INTO auth (username, password_) VALUES (?, ?)"
         conn.execute(query, (un, pw)).fetchall()
         conn.commit()
         flask.session["uid"] = un

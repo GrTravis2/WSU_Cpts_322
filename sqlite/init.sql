@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS INPUT_DATA;
 DROP TABLE IF EXISTS ROOM_LOG;
 DROP TABLE IF EXISTS AUTH;
 
-CREATE TABLE CLUB_DATA (
+CREATE TABLE club_data (
     club_name TEXT,
     club_president TEXT,
     club_email TEXT,
@@ -13,7 +13,7 @@ CREATE TABLE CLUB_DATA (
     PRIMARY KEY (club_name)
 );
 
-CREATE TABLE INPUT_DATA (
+CREATE TABLE input_data (
     building TEXT,
     room_num INTEGER,
     times_accessed INTEGER,
@@ -23,7 +23,7 @@ CREATE TABLE INPUT_DATA (
     PRIMARY KEY (room_num, building)
 );
 
-CREATE TABLE ROOM_LOG (
+CREATE TABLE room_log (
     building TEXT,
     room_num INTEGER,
     assigned_club TEXT,
@@ -31,7 +31,7 @@ CREATE TABLE ROOM_LOG (
     FOREIGN KEY (assigned_club) REFERENCES CLUB_DATA (club_name)
 );
 
-CREATE TABLE AUTH (
+CREATE TABLE auth (
     username TEXT,
     password_ TEXT,
     PRIMARY KEY (username)
