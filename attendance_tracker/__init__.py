@@ -6,8 +6,6 @@ import pathlib
 import sqlite3
 
 import click
-import pathlib
-
 import flask
 
 import attendance_tracker.types.tables as tables
@@ -78,10 +76,15 @@ def create_app() -> AttendanceTracker:
         db_path.parent.mkdir(exist_ok=True)
         db_path.touch()
 
+    # get secret to save in config for session handling
+    with pathlib.Path("./.env").open("r", encoding="utf-8") as env:
+        super_secret_key = env.read().strip()
+
     # register close db to happen at clean up
     app.teardown_appcontext(app.close_db)
     app.config.from_mapping(
         DATABASE=db_path,
+        SECRET_KEY=super_secret_key,
     )
     init_db_cmd = click.Command(
         "init-db",

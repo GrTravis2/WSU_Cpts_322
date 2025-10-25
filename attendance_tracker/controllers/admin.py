@@ -13,6 +13,18 @@ ADMIN = flask.Blueprint(
 )
 
 
+@ADMIN.route("/home", methods=["GET"])
+def home() -> str | flask.Response | flask.wrappers.Response:
+    """Home page for navigating to admin functions."""
+    if flask.session.get("uid") is None:
+        # type hints are angry, dont know exactly why...
+        return flask.redirect(location=flask.url_for("auth.login"))  # type: ignore
+
+    return flask.render_template(
+        "index.html",  # make actual home page later
+    )
+
+
 @ADMIN.route("/clubs", methods=["GET", "POST"])
 def club_info() -> str:
     """View all clubs that have info saved in the system."""
