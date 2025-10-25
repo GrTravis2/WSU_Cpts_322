@@ -48,3 +48,14 @@ def club_config(club_name: str = "") -> str:
         "club_config.html",
         club=club,
     )
+
+
+@ADMIN.route("/add-club", methods=["GET", "POST"])  # type: ignore
+def add_club():
+    """Add a club to the db."""
+    if flask.request.method == "POST":
+        print(
+            flask.request.form
+        )  # making sure all the info is getting to this route from the form
+    # insert into the db logic here
+    return flask.render_template("add_club.html")

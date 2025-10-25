@@ -1,13 +1,13 @@
 """Attendance tracker analytics web app."""
 
 import csv
+import datetime
 import functools
 import pathlib
+import random
 import sqlite3
 
 import click
-import pathlib
-
 import flask
 
 import attendance_tracker.types.tables as tables
@@ -69,6 +69,55 @@ def _load_samples(db_path: pathlib.Path) -> None:
         print(f"successfully inserted {count[0]} rows")
 
 
+def _model_data_with_date():
+    room_names = ["Demo Club 1", "Demo Club 2", "Demo Club 3"]
+    start_date = datetime.date.today()
+    date_list = [start_date + datetime.timedelta(days=i) for i in range(90)]
+
+    # splitting the known rooms/numbers we have
+    data = {
+        "Dana": [3, 51, 117, 213, 215, 216],
+        "Dana hall room": [216, 242],
+        "Dana hall rm": [246, 306],
+        "EEME": [207],
+        "Sloan": [242, 327],
+    }
+
+    out_path = pathlib.Path("./docs/exampleDataWithDates.csv")
+
+    with out_path.open("w", newline="") as out_file:
+        csv_writer = csv.writer(out_file)
+
+        header = [
+            "Building",
+            "RoomNum",
+            "RoomName",
+            "PatronNum",
+            "TotalPassed",
+            "TotalFailed",
+            "Date",
+        ]
+        csv_writer.writerow(header)
+        for _ in range(150):
+            building_name_col = random.choice(list(data.keys()))
+            building_num_col = random.choice(data[building_name_col])
+            room_name_col = random.choice(room_names)
+            patron_num_col = random.randint(0, 35)
+            total_allowed = random.randint(0, patron_num_col)
+            total_denied = patron_num_col - total_allowed
+            date = random.choice(date_list).strftime("%m/%d/%y")
+            row = [
+                building_name_col,
+                building_num_col,
+                room_name_col,
+                patron_num_col,
+                total_allowed,
+                total_denied,
+                date,
+            ]
+            csv_writer.writerow(row)
+
+
 def create_app() -> AttendanceTracker:
     """Entry point for flask app."""
     app = AttendanceTracker(__name__, instance_relative_config=True)
@@ -94,6 +143,12 @@ def create_app() -> AttendanceTracker:
         callback=functools.partial(_load_samples, db_path),
     )
     app.cli.add_command(load_db_cmd)  # register data load as flask cmd
+
+    generate_sample_data = click.Command(
+        "gen-sample-data",
+        callback=_model_data_with_date,
+    )
+    app.cli.add_command(generate_sample_data)  # gen sample data as flask cmd
 
     app.register_blueprint(ADMIN)
     app.register_blueprint(ANALYTICS)
