@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import functools
 import sqlite3
+from typing import Callable
 
 import flask
 
@@ -11,6 +13,18 @@ AUTH = flask.Blueprint(
     import_name=__name__,
     url_prefix="/h/auth",
 )
+
+
+def required(func: Callable) -> Callable | flask.Response:
+    """Redirects to login page if user is not authenticated."""
+
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        if flask.session.get("uid") is None:
+            return flask.redirect(location=flask.url_for("auth.login"))  # type: ignore
+        return func(*args, **kwargs)
+
+    return wrapper
 
 
 @AUTH.route("/login", methods=["GET", "POST"])

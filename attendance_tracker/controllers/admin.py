@@ -6,6 +6,8 @@ import sqlite3
 
 import flask
 
+from attendance_tracker.controllers import auth
+
 ADMIN = flask.Blueprint(
     name="admin",
     import_name=__name__,
@@ -14,18 +16,16 @@ ADMIN = flask.Blueprint(
 
 
 @ADMIN.route("/home", methods=["GET"])
+@auth.required
 def home() -> str | flask.Response | flask.wrappers.Response:
     """Home page for navigating to admin functions."""
-    if flask.session.get("uid") is None:
-        # type hints are angry, dont know exactly why...
-        return flask.redirect(location=flask.url_for("auth.login"))  # type: ignore
-
     return flask.render_template(
         "index.html",  # make actual home page later
     )
 
 
 @ADMIN.route("/clubs", methods=["GET", "POST"])
+@auth.required
 def club_info() -> str:
     """View all clubs that have info saved in the system."""
     with flask.current_app.app_context():
@@ -46,6 +46,7 @@ def club_info() -> str:
 
 
 @ADMIN.route("/club-config/<club_name>", methods=["GET", "POST"])
+@auth.required
 def club_config(club_name: str = "") -> str:
     """View club specific information and update."""
     with flask.current_app.app_context():
