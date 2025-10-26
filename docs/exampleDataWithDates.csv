@@ -1,151 +1,54 @@
 Building,RoomNum,RoomName,PatronNum,TotalPassed,TotalFailed,Date
-EEME,207,Demo Club 3,8,5,3,12/31/25
-Dana hall room,216,Demo Club 1,22,21,1,12/08/25
-Dana hall rm,246,Demo Club 2,8,7,1,10/27/25
-EEME,207,Demo Club 2,0,0,0,11/14/25
-Dana,3,Demo Club 1,30,0,30,12/03/25
-Dana hall rm,246,Demo Club 1,13,9,4,11/30/25
-EEME,207,Demo Club 3,12,8,4,11/20/25
-Dana,216,Demo Club 2,1,1,0,11/26/25
-EEME,207,Demo Club 2,26,25,1,11/27/25
-Dana,3,Demo Club 2,22,5,17,12/24/25
-Dana hall rm,306,Demo Club 3,25,23,2,12/21/25
-Dana hall room,242,Demo Club 3,25,19,6,12/02/25
-EEME,207,Demo Club 3,9,2,7,12/31/25
-Dana,215,Demo Club 1,10,1,9,01/20/26
-Sloan,242,Demo Club 2,25,11,14,12/17/25
-Dana,213,Demo Club 3,15,7,8,11/16/25
-EEME,207,Demo Club 2,10,5,5,12/08/25
-Dana hall room,216,Demo Club 1,35,10,25,11/18/25
-Sloan,242,Demo Club 3,14,6,8,10/24/25
-Dana hall room,242,Demo Club 1,34,23,11,10/30/25
-Sloan,242,Demo Club 1,22,22,0,10/26/25
-EEME,207,Demo Club 1,10,5,5,01/20/26
-Dana,215,Demo Club 3,3,3,0,01/17/26
-Dana hall rm,246,Demo Club 2,16,16,0,11/16/25
-EEME,207,Demo Club 2,11,9,2,12/15/25
-Dana,215,Demo Club 3,26,6,20,11/03/25
-Dana hall rm,246,Demo Club 1,6,0,6,12/11/25
-EEME,207,Demo Club 2,28,18,10,12/06/25
-Dana hall room,242,Demo Club 3,30,6,24,12/03/25
-Dana,215,Demo Club 2,10,7,3,12/02/25
-Dana hall rm,306,Demo Club 1,22,12,10,01/01/26
-Sloan,242,Demo Club 2,0,0,0,01/03/26
-Dana,51,Demo Club 2,2,2,0,10/25/25
-Dana hall rm,246,Demo Club 1,19,15,4,11/26/25
-Dana hall rm,306,Demo Club 1,7,2,5,11/03/25
-Sloan,242,Demo Club 2,23,19,4,10/24/25
-Dana hall rm,306,Demo Club 3,30,3,27,10/31/25
-Dana,117,Demo Club 2,25,12,13,12/21/25
-Dana hall room,216,Demo Club 2,11,8,3,12/20/25
-Dana hall room,216,Demo Club 2,11,8,3,01/08/26
-Dana hall room,216,Demo Club 2,20,10,10,12/20/25
-Dana hall rm,306,Demo Club 1,28,25,3,11/28/25
-Dana,216,Demo Club 3,31,30,1,12/26/25
-Sloan,327,Demo Club 1,15,14,1,12/20/25
-Dana hall rm,246,Demo Club 2,14,11,3,11/11/25
-EEME,207,Demo Club 2,9,1,8,11/25/25
-Sloan,242,Demo Club 3,20,9,11,12/28/25
-Dana,213,Demo Club 3,1,1,0,12/22/25
-Dana hall room,216,Demo Club 1,6,5,1,11/27/25
-Dana hall rm,306,Demo Club 1,21,14,7,12/26/25
-Dana hall room,242,Demo Club 3,23,8,15,12/08/25
-Dana hall room,216,Demo Club 2,25,0,25,11/10/25
-Sloan,327,Demo Club 3,21,4,17,11/10/25
-Dana hall room,242,Demo Club 3,28,28,0,01/13/26
-EEME,207,Demo Club 1,12,5,7,11/11/25
-EEME,207,Demo Club 1,14,10,4,01/06/26
-Dana hall room,216,Demo Club 3,34,3,31,12/13/25
-Dana hall rm,306,Demo Club 1,0,0,0,11/05/25
-Dana hall rm,246,Demo Club 3,0,0,0,12/16/25
-EEME,207,Demo Club 3,32,16,16,12/29/25
-Sloan,327,Demo Club 1,35,16,19,01/15/26
-Dana hall room,242,Demo Club 2,3,0,3,11/13/25
-Dana hall room,216,Demo Club 2,23,16,7,12/26/25
-EEME,207,Demo Club 2,28,5,23,01/17/26
-Dana hall room,242,Demo Club 2,13,12,1,01/05/26
-Dana hall room,242,Demo Club 3,2,1,1,01/12/26
-Dana hall rm,306,Demo Club 2,35,19,16,10/28/25
-Sloan,242,Demo Club 3,7,6,1,11/15/25
-Sloan,327,Demo Club 3,28,7,21,12/23/25
-EEME,207,Demo Club 2,34,9,25,11/24/25
-EEME,207,Demo Club 3,35,11,24,12/27/25
-Dana,3,Demo Club 2,34,11,23,01/21/26
-Dana hall room,216,Demo Club 1,19,16,3,11/12/25
-Dana,117,Demo Club 1,0,0,0,12/23/25
-Sloan,327,Demo Club 2,18,5,13,12/10/25
-Dana hall rm,306,Demo Club 2,11,7,4,12/25/25
-Sloan,327,Demo Club 1,12,4,8,12/01/25
-Sloan,327,Demo Club 3,6,5,1,11/21/25
-Dana hall room,216,Demo Club 2,8,0,8,12/28/25
-Dana hall room,242,Demo Club 1,14,14,0,11/09/25
-Dana,51,Demo Club 2,32,25,7,12/25/25
-Dana,213,Demo Club 2,6,6,0,01/13/26
-Sloan,242,Demo Club 1,7,5,2,12/29/25
-EEME,207,Demo Club 3,5,1,4,11/22/25
-Dana hall rm,306,Demo Club 3,5,1,4,01/12/26
-Sloan,242,Demo Club 3,6,2,4,11/25/25
-EEME,207,Demo Club 1,21,12,9,10/27/25
-EEME,207,Demo Club 3,8,1,7,12/22/25
-EEME,207,Demo Club 2,34,11,23,12/04/25
-EEME,207,Demo Club 3,18,5,13,01/12/26
-Dana hall room,216,Demo Club 2,3,1,2,10/25/25
-Dana hall rm,306,Demo Club 1,27,13,14,12/31/25
-EEME,207,Demo Club 2,21,9,12,12/01/25
-Dana hall room,216,Demo Club 1,16,16,0,01/20/26
-Sloan,242,Demo Club 1,0,0,0,12/06/25
-Dana hall room,216,Demo Club 3,27,5,22,12/30/25
-Sloan,327,Demo Club 3,11,1,10,12/18/25
-Sloan,327,Demo Club 3,31,14,17,01/21/26
-EEME,207,Demo Club 3,5,5,0,01/08/26
-Dana hall room,242,Demo Club 1,24,18,6,12/03/25
-EEME,207,Demo Club 1,34,3,31,12/24/25
-EEME,207,Demo Club 2,34,26,8,10/30/25
-Dana,117,Demo Club 3,17,4,13,01/02/26
-Dana hall rm,246,Demo Club 2,12,11,1,10/30/25
-Dana,215,Demo Club 3,23,19,4,12/22/25
-Sloan,327,Demo Club 3,10,9,1,12/30/25
-EEME,207,Demo Club 1,31,3,28,01/04/26
-EEME,207,Demo Club 3,5,4,1,10/30/25
-EEME,207,Demo Club 1,13,8,5,11/25/25
-Dana hall rm,306,Demo Club 1,25,1,24,12/03/25
-Dana,216,Demo Club 3,17,8,9,12/29/25
-Dana hall rm,306,Demo Club 2,18,10,8,11/08/25
-Dana hall room,216,Demo Club 2,30,5,25,01/15/26
-Dana hall rm,246,Demo Club 1,17,0,17,12/27/25
-Dana hall rm,246,Demo Club 2,31,5,26,12/01/25
-Dana hall room,242,Demo Club 3,17,13,4,11/24/25
-Sloan,242,Demo Club 1,18,6,12,12/22/25
-Sloan,327,Demo Club 1,22,20,2,11/30/25
-Dana hall room,216,Demo Club 2,8,6,2,12/10/25
-EEME,207,Demo Club 1,22,11,11,11/27/25
-Dana hall rm,246,Demo Club 1,25,24,1,12/21/25
-Dana,3,Demo Club 2,3,0,3,11/17/25
-Dana hall rm,306,Demo Club 1,31,5,26,12/23/25
-Dana hall rm,246,Demo Club 3,27,0,27,11/19/25
-Dana,213,Demo Club 1,20,10,10,01/03/26
-Dana hall room,242,Demo Club 1,2,2,0,10/30/25
-Sloan,327,Demo Club 1,12,6,6,01/18/26
-Dana hall room,242,Demo Club 1,6,5,1,01/04/26
-Dana hall room,216,Demo Club 1,26,25,1,10/29/25
-Dana,117,Demo Club 1,12,9,3,12/12/25
-EEME,207,Demo Club 3,18,5,13,01/10/26
-Sloan,327,Demo Club 2,29,28,1,10/31/25
-EEME,207,Demo Club 3,5,3,2,11/02/25
-Dana hall rm,246,Demo Club 3,28,24,4,11/30/25
-Sloan,242,Demo Club 2,11,1,10,11/09/25
-Dana hall room,216,Demo Club 2,34,32,2,10/28/25
-Dana hall rm,246,Demo Club 3,16,1,15,12/20/25
-Dana hall rm,246,Demo Club 3,30,15,15,11/17/25
-Sloan,327,Demo Club 2,23,9,14,11/20/25
-Sloan,327,Demo Club 2,33,22,11,11/27/25
-Dana hall rm,246,Demo Club 1,34,1,33,01/21/26
-Sloan,242,Demo Club 1,14,8,6,01/04/26
-Dana hall room,242,Demo Club 2,24,20,4,01/05/26
-Dana hall room,216,Demo Club 1,13,6,7,11/05/25
-Dana hall rm,246,Demo Club 2,21,17,4,12/19/25
-Dana,213,Demo Club 2,35,12,23,12/12/25
-Dana hall room,242,Demo Club 1,21,7,14,11/21/25
-Dana hall room,216,Demo Club 1,18,1,17,11/11/25
-Dana,3,Demo Club 1,31,7,24,11/18/25
-Dana hall rm,246,Demo Club 2,7,0,7,01/03/26
+Dana hall room,242,Demo Club 2,4,2,2,10/25/25
+Sloan,242,Demo Club 1,1,1,0,11/01/25
+Dana,3,Demo Club 1,14,2,12,11/08/25
+Dana hall room,216,Demo Club 2,31,5,26,11/15/25
+Sloan,242,Demo Club 1,11,8,3,11/22/25
+EEME,207,Demo Club 3,28,25,3,11/29/25
+Dana,215,Demo Club 3,34,11,23,12/06/25
+Dana hall room,242,Demo Club 1,19,16,3,12/13/25
+EEME,207,Demo Club 3,33,11,22,12/20/25
+Dana,216,Demo Club 1,0,0,0,12/27/25
+EEME,207,Demo Club 3,12,10,2,01/03/26
+EEME,207,Demo Club 2,7,0,7,01/10/26
+Dana hall rm,246,Demo Club 3,33,7,26,01/17/26
+Dana hall rm,306,Demo Club 3,1,1,0,01/24/26
+Sloan,242,Demo Club 3,29,8,21,01/31/26
+Sloan,327,Demo Club 1,15,1,14,02/07/26
+Sloan,327,Demo Club 1,17,9,8,02/14/26
+Dana hall room,242,Demo Club 2,35,29,6,02/21/26
+Dana hall room,216,Demo Club 1,29,11,18,02/28/26
+Dana hall rm,306,Demo Club 1,23,22,1,03/07/26
+Dana hall room,216,Demo Club 1,33,7,26,03/14/26
+EEME,207,Demo Club 2,31,20,11,03/21/26
+Sloan,327,Demo Club 2,8,7,1,03/28/26
+EEME,207,Demo Club 1,4,1,3,04/04/26
+Dana,117,Demo Club 1,15,10,5,04/11/26
+Dana hall rm,306,Demo Club 3,18,0,18,04/18/26
+EEME,207,Demo Club 1,26,5,21,04/25/26
+Dana,51,Demo Club 1,22,19,3,05/02/26
+Dana hall rm,306,Demo Club 3,22,6,16,05/09/26
+Dana hall rm,306,Demo Club 3,18,12,6,05/16/26
+EEME,207,Demo Club 3,13,12,1,05/23/26
+Sloan,327,Demo Club 3,7,0,7,05/30/26
+EEME,207,Demo Club 3,31,9,22,06/06/26
+Dana,215,Demo Club 3,11,9,2,06/13/26
+Dana hall room,216,Demo Club 1,2,0,2,06/20/26
+Dana,216,Demo Club 3,10,6,4,06/27/26
+Dana hall rm,246,Demo Club 3,31,19,12,07/04/26
+Dana hall room,216,Demo Club 3,33,27,6,07/11/26
+Dana hall rm,246,Demo Club 2,21,21,0,07/18/26
+Dana hall rm,246,Demo Club 2,30,17,13,07/25/26
+Dana hall rm,246,Demo Club 3,33,25,8,08/01/26
+EEME,207,Demo Club 1,7,7,0,08/08/26
+Sloan,242,Demo Club 3,18,2,16,08/15/26
+Dana hall room,216,Demo Club 3,11,1,10,08/22/26
+Sloan,327,Demo Club 1,35,1,34,08/29/26
+Dana hall rm,246,Demo Club 2,34,16,18,09/05/26
+Sloan,327,Demo Club 2,29,27,2,09/12/26
+Sloan,327,Demo Club 3,33,4,29,09/19/26
+Sloan,242,Demo Club 1,25,14,11,09/26/26
+EEME,207,Demo Club 1,25,17,8,10/03/26
+Dana hall room,216,Demo Club 1,7,5,2,10/10/26
+Dana,3,Demo Club 1,18,18,0,10/17/26
+Dana hall rm,306,Demo Club 3,12,0,12,10/24/26

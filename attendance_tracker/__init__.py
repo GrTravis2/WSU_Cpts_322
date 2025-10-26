@@ -36,11 +36,13 @@ def _load_samples(db_path: pathlib.Path) -> None:
     """Load sample data into the appropriate table."""
     samp_club_data = pathlib.Path("./docs/exampleRoomLogData.csv")
     samp_input_data = pathlib.Path("./docs/exampleTransactionHistory.csv")
+    even_more_input_data = pathlib.Path("./docs/exampleDataWithDates.csv")
 
     with (
         sqlite3.connect(db_path, detect_types=sqlite3.PARSE_COLNAMES) as conn,
         samp_club_data.open("r", encoding="utf-8") as club,
         samp_input_data.open("r", encoding="utf-8") as input,
+        even_more_input_data.open("r", encoding="utf-8") as more_input,
     ):
         reader = csv.reader(club)
 
@@ -62,6 +64,11 @@ def _load_samples(db_path: pathlib.Path) -> None:
         for line in reader:
             inputs.append(tables.InputData.from_list(line))
 
+        reader = csv.reader(more_input)
+        next(reader)
+        for line in reader:
+            inputs.append(tables.InputData.from_list(line))
+
         conn.executemany(inputs[0].insert_format, inputs)
         insert_query = f"SELECT COUNT(*) FROM {inputs[0].TABLE_NAME}"
         count = conn.execute(insert_query).fetchone()
@@ -71,8 +78,8 @@ def _load_samples(db_path: pathlib.Path) -> None:
 
 def _model_data_with_date():
     room_names = ["Demo Club 1", "Demo Club 2", "Demo Club 3"]
-    start_date = datetime.date.today()
-    date_list = [start_date + datetime.timedelta(days=i) for i in range(90)]
+    today = datetime.date.today()
+    date_list = [today + datetime.timedelta(days=i) for i in range(0, 365, 7)]
 
     # splitting the known rooms/numbers we have
     data = {
@@ -98,14 +105,14 @@ def _model_data_with_date():
             "Date",
         ]
         csv_writer.writerow(header)
-        for _ in range(150):
+        for date in date_list:
             building_name_col = random.choice(list(data.keys()))
             building_num_col = random.choice(data[building_name_col])
             room_name_col = random.choice(room_names)
             patron_num_col = random.randint(0, 35)
             total_allowed = random.randint(0, patron_num_col)
             total_denied = patron_num_col - total_allowed
-            date = random.choice(date_list).strftime("%m/%d/%y")
+            # date = random.choice(date_list).strftime("%m/%d/%y")
             row = [
                 building_name_col,
                 building_num_col,
@@ -113,7 +120,7 @@ def _model_data_with_date():
                 patron_num_col,
                 total_allowed,
                 total_denied,
-                date,
+                date.strftime("%m/%d/%y"),
             ]
             csv_writer.writerow(row)
 

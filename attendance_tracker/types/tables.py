@@ -67,14 +67,14 @@ class InputData(NamedTuple):
     def from_list(cls, csv_line: list[str]) -> Self:
         """Create InputData instance from raw list of str input."""
         match csv_line:
-            case [b, r, _, t, s, f]:
+            case [b, r, _, t, s, f, d]:
                 return cls(
                     b,
                     int(r),
                     int(t),
                     int(s),
                     int(f),
-                    "9/30/25",
+                    d,
                 )
             case _:
                 msg = f"unrecognized input str {csv_line}"
