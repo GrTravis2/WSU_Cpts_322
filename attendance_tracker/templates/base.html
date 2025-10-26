@@ -5,7 +5,7 @@
         <title>{% block title %}{{title}}{% endblock %}</title>
             <link href="{{ url_for('static', filename='style.css')}}" rel="stylesheet">
     </head>
-    <body class="bg-cougGray text-white flex-col min-h-screen">
+    <body class="flex bg-cougGray text-white flex-col min-h-screen">
 
         <!-- Navbar is fixed on every page -->
         <nav class="fixed top-0 left-0 w-full bg-cougCrimson text-white py-2 shadow-md z-50">
@@ -50,14 +50,14 @@
         <!-- Individual page name -->
         <h1>{% block name %}{{name}}{% endblock %}</h1>
 
-        <main class="flex-grow pt-20 text-3xl">
+        <main class="grow pt-20 text-3xl">
             {% block content %}
                 {# content goes here #}
             {% endblock %}
         </main>
 
         <!-- Footer stuff -->
-        <footer class="bg-white text-black text-center sticky top-[100vh] py-5">
+        <footer class="shrink bg-white text-black text-center sticky top-[100vh] py-5">
                 <p>Attendance Tracking App 2025</p>
         </footer>
     </body>
