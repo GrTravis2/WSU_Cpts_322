@@ -89,6 +89,9 @@ def _model_data_with_date():
         "EEME": [207],
         "Sloan": [242, 327],
     }
+    listed: list[tuple[str, int]] = []
+    for key, values in data.items():
+        listed.extend([(key, v) for v in values])
 
     out_path = pathlib.Path("./docs/exampleDataWithDates.csv")
 
@@ -106,23 +109,21 @@ def _model_data_with_date():
         ]
         csv_writer.writerow(header)
         for date in date_list:
-            building_name_col = random.choice(list(data.keys()))
-            building_num_col = random.choice(data[building_name_col])
-            room_name_col = random.choice(room_names)
-            patron_num_col = random.randint(0, 35)
-            total_allowed = random.randint(0, patron_num_col)
-            total_denied = patron_num_col - total_allowed
-            # date = random.choice(date_list).strftime("%m/%d/%y")
-            row = [
-                building_name_col,
-                building_num_col,
-                room_name_col,
-                patron_num_col,
-                total_allowed,
-                total_denied,
-                date.strftime("%m/%d/%y"),
-            ]
-            csv_writer.writerow(row)
+            for location in listed:
+                building, room = location
+                patron_num_col = random.randint(0, 35)
+                total_allowed = random.randint(0, patron_num_col)
+                total_denied = patron_num_col - total_allowed
+                row = [
+                    building,
+                    room,
+                    random.choice(room_names),
+                    patron_num_col,
+                    total_allowed,
+                    total_denied,
+                    date.strftime("%Y-%m-%d"),
+                ]
+                csv_writer.writerow(row)
 
 
 def create_app() -> AttendanceTracker:

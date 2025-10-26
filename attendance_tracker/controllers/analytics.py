@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 import json
-import random
+import re
+import sqlite3
 from typing import Literal, NamedTuple, Sequence, TypedDict
 
 import flask
@@ -19,22 +20,65 @@ ANALYTICS = Blueprint(
 @ANALYTICS.route("/data-view", methods=["GET", "POST"])
 def data_view() -> flask.Response | str:
     """View data based on query entered using form."""
-    # db = app.get_db
+    with flask.current_app.app_context():
+        conn: sqlite3.Connection = flask.current_app.get_db()  # type: ignore
     chart_config = _create_line_chart()  # default empty plot
-    rooms = [random.randrange(20, 400, 10) for _ in range(10)]
 
     if flask.request.method == "POST":
-        f = flask.request.form
-        if f["duration"] and f["room"]:  # form is filled out fully
-            # TODO (Gavin): put the query here
-            xs = [i for i in range(10)]
-            dataset = Series(
-                "accesses", list(random.randrange(0, 100) for _ in range(10))
-            )
-            chart_config = _create_line_chart(xs, [dataset])
+        # read form inputs
+        location: str = flask.request.form.get("location") or ""
+        start = flask.request.form.get("start_date") or ""
+        end = flask.request.form.get("end_date") or ""
+        result = re.match(r"(.+) (\d+)", location)
+
+        if all((location, start, end)) and result is not None:
+            match result.groups():
+                case building, room:
+                    query = """
+                            SELECT
+                             times_accessed, date_entered
+                            FROM
+                             input_data
+                            WHERE
+                                building = ? AND
+                                room_num = ? AND
+                                date_entered BETWEEN ? AND ?
+                            ORDER BY
+                                date_entered
+                            """
+                    results = conn.execute(
+                        query, (building, room, start, end)
+                    ).fetchall()
+                    x_axis = []
+                    y_axis = []
+                    for accesses, date in results:
+                        x_axis.append(date)
+                        y_axis.append(accesses)
+
+                    chart_config = _create_line_chart(
+                        x_axis,
+                        [Series(f"{building} {room}", y_axis)],
+                    )
+                case _:
+                    pass  # TODO (Anyone): improve error handling for query fail
+
+    # must be GET method
+    # TODO (Gavin): Figure out how to cache location query for repeat visits
+    query = """
+        SELECT DISTINCT
+            building, room_num
+        FROM
+            input_data
+        ORDER BY
+            room_num
+        """
+    locations = conn.execute(query).fetchall()
+    locations.sort(key=lambda i: i[1])
 
     return flask.render_template(
-        "data_view.html", chart_config=json.dumps(chart_config), rooms=rooms
+        "data_view.html",
+        chart_config=json.dumps(chart_config),
+        locations=locations,
     )
 
 

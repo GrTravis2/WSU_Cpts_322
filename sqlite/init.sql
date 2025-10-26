@@ -20,7 +20,7 @@ CREATE TABLE input_data (
     access_succeed INTEGER,
     access_fail INTEGER,
     date_entered TEXT,
-    PRIMARY KEY (room_num, date_entered)
+    PRIMARY KEY (building, room_num, date_entered)
 );
 
 CREATE TABLE room_log (
