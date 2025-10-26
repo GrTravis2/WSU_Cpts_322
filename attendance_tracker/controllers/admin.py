@@ -66,21 +66,26 @@ def club_config(club_name: str = "") -> str:
 @ADMIN.route("/add-club", methods=["GET", "POST"])
 def add_club():
     """Add a club to the db."""
+    conn: sqlite3.Connection = flask.current_app.get_db()  # type: ignore
+    cursor = conn.cursor()
     if flask.request.method == "POST":
         print(
             flask.request.form
         )  # making sure all the info is getting to this route from the form
         club_data = list(flask.request.form.values())
-        with flask.current_app.app_context():
-            conn: sqlite3.Connection = flask.current_app.get_db()  # type: ignore
-            conn.cursor().execute(
-                "INSERT INTO CLUB_DATA\
-                VALUES (?,?,?,?,?,?)",
-                club_data,
-            )
-            conn.commit()
-        # TODO: have this return to a redirected url
-
+        result = cursor.fetchone()
+        if result:
+            # TODO Ingrid: add logic for finding duplicate line
+            pass
+        else:
+            with flask.current_app.app_context():
+                cursor.execute(
+                    "INSERT INTO CLUB_DATA\
+                    VALUES (?,?,?,?,?,?)",
+                    club_data,
+                )
+                conn.commit()
+            # TODO Ingrid: have this return to a redirected url
     # back to the add form
     return flask.render_template("add_club.html")
 
@@ -88,15 +93,30 @@ def add_club():
 @ADMIN.route("/assign-room-to-club", methods=["GET", "POST"])  # type: ignore
 def assign_club():
     """Assign a room to a club."""
+    conn: sqlite3.Connection = flask.current_app.get_db()  # type: ignore
+    cursor = conn.cursor()
     if flask.request.method == "POST":
-        print(flask.request.form)
-        club_data = list(flask.request.form.values())
-        with flask.current_app.app_context():
-            conn: sqlite3.Connection = flask.current_app.get_db()  # type: ignore
-            conn.cursor().execute(
-                "INSERT INTO ROOM_LOG\
-                VALUES (?,?,?)",
-                club_data,
-            )
-            conn.commit()
+        club_name = flask.request.form["assigned_club"]
+        cursor.execute(
+            """SELECT assigned_club
+                              FROM ROOM_LOG
+                              where assigned_club=?""",
+            (club_name,),
+        )
+        result = cursor.fetchone()
+        if result:
+            # notify user and don't insert
+            flask.flash("Club already assigned to room!")
+            # redirect url to list of actively linked clubs
+            pass
+        else:
+            club_data = list(flask.request.form.values())
+            print(club_data)
+            with flask.current_app.app_context():
+                conn.cursor().execute(
+                    "INSERT INTO ROOM_LOG\
+                    VALUES (?,?,?)",
+                    club_data,
+                )
+                conn.commit()
     return flask.render_template("assign_club.html")
