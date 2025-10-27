@@ -16,6 +16,8 @@
             <button type="submit">Submit</button>
         </form>
 
+        <!-- This message likely won't stay here -->
+        <!-- Best suited for intended redirect page -->
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 <script>
@@ -23,6 +25,7 @@
                 </script>
             {% endif %}
         {% endwith %}
+
 
     </div>
 {% endblock %}

@@ -108,7 +108,8 @@ def assign_club():
             # notify user and don't insert
             flask.flash("Club already assigned to room!")
             # redirect url to list of actively linked clubs
-            pass
+            return flask.redirect(flask.url_for("admin.club_info"))
+
         else:
             club_data = list(flask.request.form.values())
             print(club_data)
@@ -120,3 +121,10 @@ def assign_club():
                 )
                 conn.commit()
     return flask.render_template("assign_club.html")
+
+
+@ADMIN.route("/dashboard")  # type: ignore
+def admin_profile():
+    """Go to user dashboard."""
+    auth = "uid" in flask.session
+    return flask.render_template("dashboard.html", authenticated=auth)

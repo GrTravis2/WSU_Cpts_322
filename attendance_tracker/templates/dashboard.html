@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" >
+</head>
+
+    <body class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <div class="header-bar">
+            <div class="header-actions">
+                <div class="user-profile">
+
+                    {% if authenticated %}
+                        {{ user }}
+                    {% else %}
+                        <div>Not logged in</div>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <a class="nav-item"  href="/">
+                <div class="nav-label">Home</div>
+            </a>
+            <a class="nav-item"  href="h/admin/dashboard">
+                <div class="nav-label">Dashboard</div>
+            </a>
+            <a class="nav-item" href="/h/admin/home">
+                <div class="nav-label">Admin</div>
+            </a>
+            <a class="nav-item"  href="/h/auth/login">
+                <div class="nav-label">Login</div>
+            </a>
+            <a class="nav-item"  href="/h/analytics/data-view">
+                <div class="nav-label">Data view</div>
+            </a>
+            <a class="nav-item"  href="/h/admin/add-club">
+                <div class="nav-label">Add club</div>
+            </a>
+            <a class="nav-item"  href="/h/admin/clubs">
+                <div class="nav-label">Clubs</div>
+            </a>
+            <a class="nav-item"  href="/h/admin/assign-room-to-club">
+                <div class="nav-label">Assign room</div>
+            </a>
+        </div>
+
+        <!-- Main content -->
+        <div class="main-content flex-1">
+            {% block content %}
+                <!-- Room for quick stats -->
+            {% endblock %}
+
+        </div>
+
+        <!-- Footer stuff -->
+        <footer class="mt-auto bg-white text-black text-center py-5">
+            <p>Attendance Tracking App 2025</p>
+        </footer>
+
+    </body>
+
+
+
+</html>
