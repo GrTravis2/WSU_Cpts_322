@@ -20,7 +20,7 @@ ADMIN = flask.Blueprint(
 def home() -> str | flask.Response:
     """Home page for navigating to admin functions."""
     return flask.render_template(
-        "index.html",  # make actual home page later
+        "admin_home.html",  # make actual home page later
     )
 
 
@@ -64,6 +64,7 @@ def club_config(club_name: str = "") -> str:
 
 
 @ADMIN.route("/add-club", methods=["GET", "POST"])
+@auth.required
 def add_club():
     """Add a club to the db."""
     if flask.request.method == "POST":
@@ -86,6 +87,7 @@ def add_club():
 
 
 @ADMIN.route("/assign-room-to-club", methods=["GET", "POST"])  # type: ignore
+@auth.required
 def assign_club():
     """Assign a room to a club."""
     if flask.request.method == "POST":

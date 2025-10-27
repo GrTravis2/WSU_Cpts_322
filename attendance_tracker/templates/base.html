@@ -5,7 +5,7 @@
         <title>{% block title %}{{title}}{% endblock %}</title>
             <link href="{{ url_for('static', filename='style.css')}}" rel="stylesheet">
     </head>
-    <body class="flex bg-cougGray text-white flex-col min-h-screen">
+    <body class="flex  flex-col min-h-screen bg-cougGray">
 
         <!-- Navbar is fixed on every page -->
         <nav class="fixed top-0 left-0 w-full bg-cougCrimson text-white py-2 shadow-md z-50">
@@ -19,28 +19,15 @@
                     <li class="relative cursor-pointer">
 
                     <!-- Login -->
-                    <a href="/h/auth/login" class="hover:after:w-full after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-white after:transition-all after:duration-300">Login</a></li>
+                    <a href="{{ url_for('auth.login')}}" class="hover:after:w-full after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-white after:transition-all after:duration-300">Login</a></li>
 
                     <!-- Data view -->
                     <li class="relative cursor-pointer">
-                    <a href="/h/analytics/data-view" class="hover:after:w-full after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-white after:transition-all after:duration-300">Data Views</a></li>
+                    <a href="{{ url_for('analytics.data_view')}}" class="hover:after:w-full after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-white after:transition-all after:duration-300">Data Views</a></li>
 
                     <!-- Admin -->
                     <li class="relative cursor-pointer">
-                    <a href="/h/admin/home" class="hover:after:w-full after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-white after:transition-all after:duration-300">Admin</a></li>
-
-                    <!-- The below few buttons aren't staying here permanently, just easier if they're easily visible for now -->
-                    <!-- Adding club to db -->
-                    <li class="relative cursor-pointer">
-                    <a href="/h/admin/add-club" class="hover:after:w-full after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-white after:transition-all after:duration-300">Add club</a></li>
-
-                    <!-- Clubs tab -->
-                    <li class="relative cursor-pointer">
-                    <a href="/h/admin/clubs" class="hover:after:w-full after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-white after:transition-all after:duration-300">Clubs</a></li>
-
-                    <!-- Assigning a room to a club -->
-                    <li class="relative cursor-pointer">
-                    <a href="/h/admin/assign-room-to-club" class="hover:after:w-full after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-white after:transition-all after:duration-300">Assign a room</a></li>
+                    <a href="{{ url_for('admin.home')}}" class="hover:after:w-full after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-white after:transition-all after:duration-300">Admin</a></li>
                 </ul>
             </div>
         </nav>

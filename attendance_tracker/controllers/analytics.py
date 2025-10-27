@@ -62,9 +62,9 @@ def data_view() -> flask.Response | str:
             summary_table["Avg"] = (
                 total / len(y_axis),
                 "-",
-            )  # f"{start} to {end}"
+            )
             summary_table["Max"] = max(results, key=lambda i: i[0])
-            summary_table["Total"] = total, "-"  # f"{start} to {end}"
+            summary_table["Total"] = total, "-"
 
             chart_config = _create_line_chart(
                 x_axis,
