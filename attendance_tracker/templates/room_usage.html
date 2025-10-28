@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %} Data View {% endblock %}
+
+{% block content %}
+<body>
+    <div class="flex flex-col content-center" >
+    <div class="grow">
+        <canvas id="data-view" data="{{ chart_config }}" | tojson class="bg-white shadow rounded-lg p-4 sm:p-5">
+        </canvas>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <div class="flex justify-center gap-2">
+        <form action="{{ url_for('analytics.usage')}}" method="post">
+
+            <!-- Timeframe options -->
+            <div class="bg-white text-black border text-sm rounded-lg">
+                <label for="start_date" class="block text-sm font-medium text-white dark:text-gray-200">Choose a time period:</label>
+                <input type="date" name="start_date" required id="start_date">
+            </div>
+            <div class="bg-white text-black border text-sm rounded-lg">
+                <label for="end_date" class="block text-sm font-medium text-white dark:text-gray-200">Choose a time period:</label>
+                <input type="date" name="end_date" required id="end_date">
+                </select>
+            </div>
+
+            <!-- Button -->
+            <div class="button bg-cougCrimson text-white border text-sm rounded-lg py-2">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+    </div>
+
+</body>
+<script>
+    const ctx = document.getElementById("data-view");
+    cfg = JSON.parse(ctx.getAttribute("data"));
+    new Chart(ctx, cfg);
+</script>
+{% endblock %}
