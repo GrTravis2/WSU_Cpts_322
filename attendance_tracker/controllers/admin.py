@@ -114,7 +114,7 @@ def assign_club():
             print(club_data)
             with flask.current_app.app_context():
                 conn.cursor().execute(
-                    "INSERT INTO ROOM_LOG\
+                    "INSERT INTO room_log\
                     VALUES (?,?,?)",
                     club_data,
                 )
