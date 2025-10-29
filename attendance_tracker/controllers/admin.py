@@ -52,11 +52,6 @@ def club_config(club_name: str = "") -> str:
     with flask.current_app.app_context():
         conn: sqlite3.Connection = flask.current_app.get_db()  # type: ignore
 
-    # query = f"SELECT * FROM CLUB_DATA WHERE CLUB_NAME={club_name}"
-    # club = conn.execute(query).fetchone()
-    # conn.execute("")
-    # club = ("club", "name", "email", "size", "advisor", "advisor email")
-
     query = "SELECT * FROM CLUB_DATA WHERE CLUB_NAME=?"
     club = conn.execute(query, (club_name,)).fetchone()
 
@@ -76,16 +71,12 @@ def add_club():
         conn: sqlite3.Connection = flask.current_app.get_db()  # type: ignore
         cursor = conn.cursor()
 
-        # print(    # debug print
-        #     flask.request.form
-        # )  # making sure all the info is getting to this route from the form
-
         club_data = list(flask.request.form.values())
 
         cursor.execute(
             """SELECT CLUB_NAME
-                                FROM CLUB_DATA
-                                where CLUB_NAME=?""",
+                FROM CLUB_DATA
+                where CLUB_NAME=?""",
             (club,),
         )
 
@@ -93,13 +84,12 @@ def add_club():
         if result:
             flask.flash("Club already exists!")
         else:
-            with flask.current_app.app_context():
-                cursor.execute(
-                    "INSERT INTO CLUB_DATA\
-                    VALUES (?,?,?,?,?,?)",
-                    club_data,
-                )
-                conn.commit()
+            cursor.execute(
+                "INSERT INTO CLUB_DATA\
+                VALUES (?,?,?,?,?,?)",
+                club_data,
+            )
+            conn.commit()
         location = flask.url_for("admin.club_config", club_name=club)
         return flask.redirect(location)
     return flask.render_template("add_club.html")
@@ -110,16 +100,18 @@ def add_club():
 def assign_club():
     """Assign a room to a club."""
     if flask.request.method == "POST":
-        club_name = flask.request.form["assigned_club"]
+        club = flask.request.form["assigned_club"]
 
         conn: sqlite3.Connection = flask.current_app.get_db()  # type: ignore
         cursor = conn.cursor()
 
+        club_data = list(flask.request.form.values())
+
         cursor.execute(
             """SELECT ASSIGNED_CLUB
-                                FROM ROOM_LOG
-                                where ASSIGNED_CLUB=?""",
-            (club_name,),
+                FROM ROOM_LOG
+                where ASSIGNED_CLUB=?""",
+            (club,),
         )
 
         result = cursor.fetchone()
@@ -128,16 +120,12 @@ def assign_club():
             # notify user and don't insert
             flask.flash("Club already assigned to room!")
         else:
-            club_data = list(flask.request.form.values())
-            print(club_data)
-            with flask.current_app.app_context():
-                conn.cursor().execute(
-                    "INSERT INTO ROOM_LOG\
-                    VALUES (?,?,?)",
-                    club_data,
-                )
-
+            conn.cursor().execute(
+                "INSERT INTO ROOM_LOG\
+                VALUES (?,?,?)",
+                club_data,
+            )
             conn.commit()
-        location = flask.url_for("admin.club_config", club_name=club_name)
+        location = flask.url_for("admin.club_config", club_name=club)
         return flask.redirect(location)
     return flask.render_template("assign_club.html")
