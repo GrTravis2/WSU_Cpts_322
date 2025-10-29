@@ -1,10 +1,19 @@
-from imap_tools import MailBox
-from imap_tools import AND
+"""Email detection and csv retrieval."""
+
+from __future__ import annotations
+
 import os
 from pathlib import Path
 
-MAIL_PASSWORD = "your app api password"
-MAIL_USERNAME = "your email.com"
+from imap_tools import (
+    AND,  # pyright: ignore[reportPrivateImportUsage] this is a spurious error, still gets the subpackages
+)
+from imap_tools import (
+    MailBox,  # pyright: ignore[reportPrivateImportUsage] this is a spurious error, still gets the subpackages
+)
+
+MAIL_PASSWORD = ""
+MAIL_USERNAME = "dbkopitzke@gmail.com"
 MAIL_SERVER = "imap.gmail.com"
 
 DOWNLOADS_DIR = str(Path.home() / "Downloads")
@@ -14,9 +23,9 @@ if not os.path.exists(DOWNLOAD_FOLDER):
     os.makedirs(DOWNLOAD_FOLDER)
     print(f"Created csv download folder at {DOWNLOAD_FOLDER}")
 
-with MailBox(MAIL_SERVER).login(MAIL_USERNAME, MAIL_PASSWORD,"INBOX") as mailbox:
+with MailBox(MAIL_SERVER).login(MAIL_USERNAME, MAIL_PASSWORD, "INBOX") as mailbox:
     print("Logged in successfully")
-    for msg in mailbox.fetch(AND(subject = "WSU Track")):
+    for msg in mailbox.fetch(AND(subject="WSU Track")):
         print(f"From: {msg.from_}")
         print(f"Subject: {msg.subject}")
         print(f"Date: {msg.date}")
@@ -28,4 +37,3 @@ with MailBox(MAIL_SERVER).login(MAIL_USERNAME, MAIL_PASSWORD,"INBOX") as mailbox
                 with open(filepath, "wb") as f:
                     f.write(att.payload)
                 print(f"Saved attachment to {filepath}")
-

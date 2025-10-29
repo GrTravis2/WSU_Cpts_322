@@ -24,13 +24,14 @@ dev = [
     "isort",
     "pyright",
     "pytailwindcss",
+    "imap_tools",
 ]
 
 [tool.setuptools.packages.find]
 where = ["attendance_tracker"]
 
 [tool.ruff]
-line-length = 80 # max line length
+line-length = 120 # max line length
 select = [
     "E", # code style errs
     "W", # code style warnings
