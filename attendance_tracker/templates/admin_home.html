@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" >
+</head>
+
+    <body class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <div class="header-bar">
+            <div class="header-actions">
+                <div class="user-profile font-bold text-2xl">
+
+                    {% if authenticated %}
+                        Hello, {{ user }}!
+                    {% else %}
+                        <div>Hello!</div>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Main content -->
+        <div class="main-content">
+            {% block content %}
+                <!-- Tiles for quick stats -->
+                <div class="card-grid">
+                    <a href="{{ url_for('admin.add_club') }}" class="card-tile">Add Club</a>
+                    <a href="{{ url_for('admin.assign_club') }}" class="card-tile">Assign Room</a>
+                    <a href="{{ url_for('admin.club_info') }}" class="card-tile">View Clubs</a>
+
+                </div>
+
+            {% endblock %}
+
+        </div>
+
+        <!-- Can't get the spacing right on this logo but we'll keep on trucking -->
+        <div class="footy">
+
+        </div>
+    </body>
+
+
+
+</html>

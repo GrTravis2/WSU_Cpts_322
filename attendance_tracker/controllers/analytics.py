@@ -22,7 +22,7 @@ def data_view() -> flask.Response | str:
     """View data based on query entered using form."""
     with flask.current_app.app_context():
         conn: sqlite3.Connection = flask.current_app.get_db()  # type: ignore
-    chart_config = _create_line_chart()  # default empty plot
+    chart_config = _create_chart()  # default empty plot
     summary_table: dict[str, tuple[float | int, str]] = {}  # empty stats table
 
     if flask.request.method == "POST":
@@ -62,11 +62,12 @@ def data_view() -> flask.Response | str:
             summary_table["Avg"] = (
                 total / len(y_axis),
                 "-",
-            )  # f"{start} to {end}"
+            )
             summary_table["Max"] = max(results, key=lambda i: i[0])
-            summary_table["Total"] = total, "-"  # f"{start} to {end}"
+            summary_table["Total"] = total, "-"
 
-            chart_config = _create_line_chart(
+            chart_config = _create_chart(
+                "line",
                 x_axis,
                 [Series(f"{building} {room}", y_axis)],
             )
@@ -93,6 +94,56 @@ def data_view() -> flask.Response | str:
     )
 
 
+@ANALYTICS.route("/usage", methods=["GET", "POST"])
+def usage() -> str:
+    """View usage of all rooms over the last 3 months."""
+    with flask.current_app.app_context():
+        conn: sqlite3.Connection = flask.current_app.get_db()  # type: ignore
+    chart_config = _create_chart()  # default empty plot
+
+    if flask.request.method == "POST":
+        # read form inputs
+        start = flask.request.form.get("start_date") or ""
+        end = flask.request.form.get("end_date") or ""
+
+        if start and end:
+            query = """
+                    SELECT
+                        building || ' ' || room_num AS location,
+                        SUM(times_accessed) AS num_accesses
+                    FROM
+                        input_data
+                    WHERE
+                        date_entered BETWEEN ? AND ?
+                    GROUP BY
+                        location
+                    ORDER BY
+                        num_accesses DESC;
+                    """
+            results = conn.execute(
+                query,
+                (start, end),
+            ).fetchall()
+            x_axis = []
+            y_axis = []
+            for location, accesses in results:
+                x_axis.append(location)
+                y_axis.append(accesses)
+
+            chart_config = _create_chart(
+                "bar",
+                x_axis,
+                [Series("Number of Accesses", y_axis)],
+            )
+            # TODO (Anyone): improve error handling for query fail
+
+    # must be GET method
+    return flask.render_template(
+        "room_usage.html",
+        chart_config=json.dumps(chart_config),
+    )
+
+
 class _ChartJSConfig(TypedDict):
     type: Literal["bar", "line"]
     data: dict
@@ -106,11 +157,12 @@ class Series(NamedTuple):
     points: list[int | float]
 
 
-def _create_line_chart(
+def _create_chart(
+    type: Literal["bar", "line"] = "line",
     x_vals: Sequence[int | float] | None = None,
     datasets: Sequence[Series] | None = None,
 ) -> _ChartJSConfig:
-    """Create a line chart from the given data."""
+    """Create a chart from the given data."""
     if x_vals is not None and datasets is not None:
         data = {  # convert to dict if both lists present
             "labels": x_vals,
@@ -144,7 +196,51 @@ def _create_line_chart(
     }
 
     return _ChartJSConfig(
-        type="line",
+        type=type,
+        data=data,
+        options=options,
+    )
+
+
+def _create_bar_chart(
+    x_vals: Sequence[int | float] | None = None,
+    datasets: Sequence[Series] | None = None,
+) -> _ChartJSConfig:
+    """Create a bar chart from the given data."""
+    if x_vals is not None and datasets is not None:
+        data = {  # convert to dict if both lists present
+            "labels": x_vals,
+            "datasets": [{"label": n, "data": d} for n, d in datasets],
+        }
+    else:  # default to empty plot if both lists aren't there
+        data = {
+            "labels": [],
+            "datasets": [{"label": ""}],
+        }
+
+    options = {  # adding these so the chart can be resized
+        "responsive": True,
+        "maintainAspectRatio": False,
+        "scales": {
+            "x": {
+                "display": True,
+                "title": {
+                    "display": True,
+                    "text": "Week",
+                },
+            },
+            "y": {
+                "display": True,
+                "title": {
+                    "display": True,
+                    "text": "Number of Accesses",
+                },
+            },
+        },
+    }
+
+    return _ChartJSConfig(
+        type="bar",
         data=data,
         options=options,
     )
