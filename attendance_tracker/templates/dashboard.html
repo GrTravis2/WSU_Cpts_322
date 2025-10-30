@@ -1,3 +1,4 @@
+{% extends 'base.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,12 +12,12 @@
         <!-- Header -->
         <div class="header-bar">
             <div class="header-actions">
-                <div class="user-profile">
+                <div class="user-profile font-bold text-2xl">
 
                     {% if authenticated %}
-                        {{ user }}
+                        Hello, {{ user }}!
                     {% else %}
-                        <div>Not logged in</div>
+                        <div>Hello!</div>
                     {% endif %}
 
                 </div>
@@ -24,47 +25,25 @@
         </div>
 
 
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <a class="nav-item"  href="/">
-                <div class="nav-label">Home</div>
-            </a>
-            <a class="nav-item"  href="h/admin/dashboard">
-                <div class="nav-label">Dashboard</div>
-            </a>
-            <a class="nav-item" href="/h/admin/home">
-                <div class="nav-label">Admin</div>
-            </a>
-            <a class="nav-item"  href="/h/auth/login">
-                <div class="nav-label">Login</div>
-            </a>
-            <a class="nav-item"  href="/h/analytics/data-view">
-                <div class="nav-label">Data view</div>
-            </a>
-            <a class="nav-item"  href="/h/admin/add-club">
-                <div class="nav-label">Add club</div>
-            </a>
-            <a class="nav-item"  href="/h/admin/clubs">
-                <div class="nav-label">Clubs</div>
-            </a>
-            <a class="nav-item"  href="/h/admin/assign-room-to-club">
-                <div class="nav-label">Assign room</div>
-            </a>
-        </div>
-
         <!-- Main content -->
-        <div class="main-content flex-1">
+        <div class="main-content">
             {% block content %}
-                <!-- Room for quick stats -->
+                <!-- Tiles for quick stats -->
+                <div class="card-grid">
+                    <a href="/h/admin/add-club" class="card-tile">Add Club</a>
+                    <a href="/h/admin/assign-room-to-club" class="card-tile">Assign Room</a>
+                    <a href="/h/admin/clubs" class="card-tile">View Clubs</a>
+
+                </div>
+
             {% endblock %}
 
         </div>
 
-        <!-- Footer stuff -->
-        <footer class="mt-auto bg-white text-black text-center py-5">
-            <p>Attendance Tracking App 2025</p>
-        </footer>
+        <!-- Can't get the spacing right on this logo but we'll keep on trucking -->
+        <div class="footy">
 
+        </div>
     </body>
 
 
