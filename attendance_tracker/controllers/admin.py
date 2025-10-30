@@ -68,9 +68,8 @@ def club_config(club_name: str = "") -> str:
 def add_club():
     """Add a club to the db."""
     if flask.request.method == "POST":
-        print(
-            flask.request.form
-        )  # making sure all the info is getting to this route from the form
+        print(flask.request.form)  # noqa
+        # making sure all the info is getting to this route from the form
         club_data = list(flask.request.form.values())
         with flask.current_app.app_context():
             conn: sqlite3.Connection = flask.current_app.get_db()  # type: ignore

@@ -35,13 +35,11 @@ def _init_db(db_path: pathlib.Path) -> None:
 def _load_samples(db_path: pathlib.Path) -> None:
     """Load sample data into the appropriate table."""
     samp_club_data = pathlib.Path("./docs/exampleRoomLogData.csv")
-    samp_input_data = pathlib.Path("./docs/exampleTransactionHistory.csv")
-    even_more_input_data = pathlib.Path("./docs/exampleDataWithDates.csv")
+    even_more_input_data = pathlib.Path("./docs/downloaded_csvs/cleaned_VCEA Clubs Access Summary by Location.csv")
 
     with (
         sqlite3.connect(db_path, detect_types=sqlite3.PARSE_COLNAMES) as conn,
         samp_club_data.open("r", encoding="utf-8") as club,
-        samp_input_data.open("r", encoding="utf-8") as input,
         even_more_input_data.open("r", encoding="utf-8") as more_input,
     ):
         reader = csv.reader(club)
@@ -52,18 +50,11 @@ def _load_samples(db_path: pathlib.Path) -> None:
             room_log.append(tables.RoomLog.from_list(line))
 
         conn.executemany(room_log[0].insert_format, room_log)
-        count = conn.execute(
-            f"SELECT COUNT(*) FROM {room_log[0].TABLE_NAME}"
-        ).fetchone()
+        count = conn.execute(f"SELECT COUNT(*) FROM {room_log[0].TABLE_NAME}").fetchone()
         # print first column which is count
         print(f"successfully inserted {count[0]} rows")
 
-        reader = csv.reader(input)
-        next(reader)
         inputs: list[tables.InputData] = []
-        for line in reader:
-            inputs.append(tables.InputData.from_list(line))
-
         reader = csv.reader(more_input)
         next(reader)
         for line in reader:

@@ -16,7 +16,7 @@ MAIL_PASSWORD = ""
 MAIL_USERNAME = "dbkopitzke@gmail.com"
 MAIL_SERVER = "imap.gmail.com"
 
-DOWNLOADS_DIR = str(Path.home() / "Downloads")
+DOWNLOADS_DIR = str(Path("./docs").resolve())
 DOWNLOAD_FOLDER = os.path.join(DOWNLOADS_DIR, "downloaded_csvs")
 
 if not os.path.exists(DOWNLOAD_FOLDER):
