@@ -5,13 +5,13 @@
 
 <!-- Page content -->
 {% block content %}
-<div class="min-h-screen flex items-center justify-center p-4">
-  <div class="max-w-md w-full bg-white rounded-xl shadow-lg p-8">
+<div class="flex items-center justify-center p-20">
+  <div class="max-w-md w-full bg-white rounded-2xl shadow-xl p-8">
     {% if not authenticated %}
     <h2 class="text-2xl text-gray-900 mb-6 text-center">Sign In</h2>
 
     <!-- Form -->
-     {% if sign_up %}
+    {% if sign_up %}
     <form action="{{ url_for('auth.sign_up') }}" method="post" class="space-y-4">
     {% else %}
     <form action="{{ url_for('auth.login') }}" method="post" class="space-y-4">
@@ -29,8 +29,8 @@
       </div>
 
       <!-- Sign in button -->
-      <div class="flex items-center justify-between">
-        <button type="submit" class="w-full bg-cougCrimson hover:bg-cougRed text-white font-[Proxima Nova] py-2.5 rounded-lg transition-colors">{{ action }}</button>
+      <div class="flex items-center justify-center">
+        <button class="button-element bg-color" type="submit">{{ action }}</button>
       </div>
     </form>
 
@@ -41,7 +41,9 @@
     {% else %}
     <h2 class="text-2xl text-gray-900 mb-6 text-center">user: '{{username}}' successfully logged in!</h2>
     <form action="{{ url_for('auth.log_out') }}" method="post" class="space-y-4">
-        <button type="submit" class="w-full bg-cougCrimson hover:bg-cougRed text-white font-[Proxima Nova] py-2.5 rounded-lg transition-colors">Log out?<button>
+      <div class="flex items-center justify-center">
+        <button class="button-element bg-color" type="submit">Log out?</button>
+      </div>
     </form>
     {% endif %}
   </div>

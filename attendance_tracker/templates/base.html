@@ -5,13 +5,15 @@
         <title>{% block title %}{{title}}{% endblock %}</title>
             <link href="{{ url_for('static', filename='style.css')}}" rel="stylesheet">
     </head>
-    <body class="flex  flex-col min-h-screen bg-cougGray">
+
+    <body class="min-h-screen flex flex-col">
 
         <!-- Navbar is fixed on every page -->
-        <nav class="fixed top-0 left-0 w-full bg-cougCrimson text-white py-2 shadow-md z-50">
-            <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
-                <h1 class="text-lg font-[Proxima Nova]">Attendance Tracking App</h1>
-                <ul class="flex gap-8 text-base">
+        <nav class="header-bar">
+            <h1 class="header-title text-white text-xl">Attendance Tracking App</h1>
+            <div class="header-actions flex items-center justify-between px-6 py-4">
+
+                <ul class="flex gap-8 text-base text-white">
                     <li class="relative cursor-pointer">
                     <!-- Menu items: -->
                     <!-- Home -->
@@ -19,18 +21,36 @@
                     <li class="relative cursor-pointer">
 
                     <!-- Login -->
-                    <a href="{{ url_for('auth.login')}}" class="hover:after:w-full after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-white after:transition-all after:duration-300">Login</a></li>
-
-                    <!-- Data view -->
+                    <a href="/h/auth/login" class="hover:after:w-full after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-white after:transition-all after:duration-300">Login</a></li>
                     <li class="relative cursor-pointer">
-                    <a href="{{ url_for('analytics.data_view')}}" class="hover:after:w-full after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-white after:transition-all after:duration-300">Data Views</a></li>
 
-                    <!-- Admin -->
+                    <!-- Admin Home -->
+                    <a href="/h/admin/dashboard" class="hover:after:w-full after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-white after:transition-all after:duration-300">Admin Home</a></li>
                     <li class="relative cursor-pointer">
-                    <a href="{{ url_for('admin.home')}}" class="hover:after:w-full after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-white after:transition-all after:duration-300">Admin</a></li>
                 </ul>
             </div>
+
         </nav>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <a class="nav-item"  href="/">
+                <div class="nav-label">Home</div>
+            </a>
+            <a class="nav-item"  href="/h/admin/add-club">
+                <div class="nav-label">Add club</div>
+            </a>
+            <a class="nav-item"  href="/h/admin/clubs">
+                <div class="nav-label">Clubs</div>
+            </a>
+            <a class="nav-item"  href="/h/admin/assign-room-to-club">
+                <div class="nav-label">Assign room</div>
+            </a>
+            <a class="nav-item"  href="/h/analytics/data-view">
+                <div class="nav-label">Data views</div>
+            </a>
+        </div>
+
 
         <!-- Page specific content -->
 
@@ -44,8 +64,9 @@
         </main>
 
         <!-- Footer stuff -->
-        <footer class="shrink bg-white text-black text-center sticky top-[100vh] py-5">
-                <p>Attendance Tracking App 2025</p>
+        <footer class="footy">
+                Attendance Tracking App 2025
         </footer>
+
     </body>
 </html>

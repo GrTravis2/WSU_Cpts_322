@@ -137,8 +137,7 @@ def assign_club():
         result = cursor.fetchone()
 
         if result:
-            # notify user and don't insert
-            flask.flash("Club already assigned to room!")
+            return flask.render_template("assign_club.html")
         else:
             conn.cursor().execute(
                 "INSERT INTO ROOM_LOG\
@@ -149,3 +148,10 @@ def assign_club():
         location = flask.url_for("admin.club_config", club_name=club)
         return flask.redirect(location)
     return flask.render_template("assign_club.html")
+
+
+@ADMIN.route("/dashboard")  # type: ignore
+def admin_profile():
+    """Go to user dashboard."""
+    auth = "uid" in flask.session
+    return flask.render_template("admin_home.html", authenticated=auth)
