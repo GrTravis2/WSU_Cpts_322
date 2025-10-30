@@ -117,8 +117,7 @@ def assign_club():
         result = cursor.fetchone()
 
         if result:
-            # notify user and don't insert
-            flask.flash("Club already assigned to room!")
+            return flask.render_template("assign_club.html")
         else:
             conn.cursor().execute(
                 "INSERT INTO ROOM_LOG\
