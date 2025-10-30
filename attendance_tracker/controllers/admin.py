@@ -7,6 +7,7 @@ import sqlite3
 import flask
 
 from attendance_tracker.controllers import auth
+from attendance_tracker.types import tables
 
 ADMIN = flask.Blueprint(
     name="admin",
@@ -31,13 +32,15 @@ def club_info() -> str:
     with flask.current_app.app_context():
         conn: sqlite3.Connection = flask.current_app.get_db()  # type: ignore
 
-    # query all the clubs here and return data view
-    # note that submitting on a target club should include URL to jump to,
-    # see base.html nav bar links, similar idea
-    # query = "SELECT BUILDING, ROOM_NUM, ASSIGNED_CLUB FROM ROOM_LOG"
-    # clubs: list[str] = conn.execute(query).fetchall()
-    conn.execute("")
-    clubs: list[tuple[str, int, str]] = [(str(i), i, str(i)) for i in range(10)]
+    query = """
+        SELECT
+            building, room_num, assigned_club
+        FROM
+            room_log
+        ORDER BY
+            building, room_num
+        """
+    clubs = conn.execute(query).fetchall()
 
     return flask.render_template(
         "club_search.html",
@@ -52,11 +55,28 @@ def club_config(club_name: str = "") -> str:
     with flask.current_app.app_context():
         conn: sqlite3.Connection = flask.current_app.get_db()  # type: ignore
 
-    query = "SELECT * FROM CLUB_DATA WHERE CLUB_NAME=?"
-    club = conn.execute(query, (club_name,)).fetchone()
+    query = """
+        SELECT
+            *
+        FROM
+            club_data
+        WHERE
+            club_name = ?
+        """
+    # club = conn.execute(query).fetchone()
+    dummy = tables.ClubData(
+        club_name="Crimson Robotics",
+        club_president="Derek",
+        email="email",
+        club_size=10,
+        club_advisor="Dr. Derek",
+        club_advisor_email="email",
+    )
+    club = conn.execute(query, (club_name,)).fetchone() or dummy
 
     return flask.render_template(
         "club_config.html",
+        club_name=club_name,
         club=club,
     )
 
