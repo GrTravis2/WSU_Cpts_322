@@ -27,6 +27,7 @@ Here are links to the issues that we completed in this sprint:
  * [Generating model data](https://github.com/users/lacroixmeariver/projects/4/views/1?pane=issue&itemId=135320613&issue=lacroixmeariver%7CWSU_Cpts_322%7C49)
  * [Add admin home web page](https://github.com/users/lacroixmeariver/projects/4/views/1?pane=issue&itemId=134158693&issue=lacroixmeariver%7CWSU_Cpts_322%7C40)
  * [Allow admin to search for under-utilized spaces](https://github.com/users/lacroixmeariver/projects/4/views/1?pane=issue&itemId=134158683&issue=lacroixmeariver%7CWSU_Cpts_322%7C11)
+ * [Admin club search/edit SQL queries](https://github.com/users/lacroixmeariver/projects/4/views/1?pane=issue&itemId=136327822&issue=lacroixmeariver%7CWSU_Cpts_322%7C59)
 
 
  Desirables (Remove this section when you save the file):
