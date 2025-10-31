@@ -1,5 +1,5 @@
 # Sprint 2 Report
-Video Link:
+Video Link: [init to win it Sprint 2](https://youtu.be/hSMXSQ1j8Sw)
 ## What's New (User Facing)
  * User authentication and persisting user sessions
  * Add/Remove new clubs to the tracker
@@ -10,12 +10,10 @@ Video Link:
  * Different UI styling/elements
 
 ## Work Summary (Developer Facing)
-Provide a one paragraph synopsis of what your team accomplished this sprint. Don't repeat the "What's New" list of features. Instead, help the instructor understand how you went about the work described there, any barriers you overcame, and any significant learnings for your team.
 
 The focus of sprint 2 was on completing the last few remaining developers tools needed to speed up the project and then spending the remaining time implementing MVP features. During sprint 2 the team completed the creation of the sqlite database, created new python types to interface with the database, defined table schemas, created scripts to handle incoming email data, set up simple authentication and then began extending the current back end of the project. Each of these individual tasks required several supporting tasks including but not limited to front end work in HTML and CSS, backend work in python and flask, and then supporting "helper" code that simplified development such as scripts for wiping the database and re-initializing with test data. The breadth of the work this sprint required lots of handoffs between members of the team and as a result lots of communication! Compared to the misses during sprint 1, things were much easier this sprint, but were not without a few hiccups in the form of duplicating work. Much of the improvements were due to better sprint planning at the beginning of the month and creating more specific GitHub issues for each task. All in all the team has made great strides in working together as a team, but there is always more room to improve!
 
 ## Unfinished Work
-If applicable, explain the work you did not finish in this sprint. For issues/user stories in the current sprint that have not been closed, (a) any progress toward completion of the issues has been clearly tracked (by checking the checkboxes of  acceptance criteria), (b) a comment has been added to the issue to explain why the issue could not be completed (e.g., "we ran out of time" or "we did not anticipate it would be so much work"), and (c) the issue is added to a subsequent sprint, so that it can be addressed later.
 
 For Sprint 2 we ended up being delayed in the automation of the cleaning and retrieval of the input csv file. This was a result of some conflicts in the naming conventions for some csv fields, and a delay in communication from the card office regarding that input data.
 
