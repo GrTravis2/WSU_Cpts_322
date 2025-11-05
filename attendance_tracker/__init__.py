@@ -10,7 +10,6 @@ import sqlite3
 import click
 import flask
 
-import attendance_tracker.types.tables as tables
 from attendance_tracker.app import AttendanceTracker
 from attendance_tracker.controllers.admin import ADMIN
 from attendance_tracker.controllers.analytics import ANALYTICS
@@ -32,39 +31,11 @@ def _init_db(db_path: pathlib.Path) -> None:
         print(f"created tables: {conn.execute(show_tables).fetchall()}\n")
 
 
-def _load_samples(db_path: pathlib.Path) -> None:
-    """Load sample data into the appropriate table."""
-    samp_club_data = pathlib.Path("./docs/exampleRoomLogData.csv")
-    even_more_input_data = pathlib.Path("./docs/downloaded_csvs/cleaned_VCEA Clubs Access Summary by Location.csv")
+def _load_from_email(db_path: pathlib.Path) -> None:
+    """Check the email and download csvs, then loads them into the db."""
+    import attendance_tracker.controllers.download_csv as download_csv
 
-    with (
-        sqlite3.connect(db_path, detect_types=sqlite3.PARSE_COLNAMES) as conn,
-        samp_club_data.open("r", encoding="utf-8") as club,
-        even_more_input_data.open("r", encoding="utf-8") as more_input,
-    ):
-        reader = csv.reader(club)
-
-        next(reader)  # skip header
-        room_log: list[tables.RoomLog] = []
-        for line in reader:
-            room_log.append(tables.RoomLog.from_list(line))
-
-        conn.executemany(room_log[0].insert_format, room_log)
-        count = conn.execute(f"SELECT COUNT(*) FROM {room_log[0].TABLE_NAME}").fetchone()
-        # print first column which is count
-        print(f"successfully inserted {count[0]} rows")
-
-        inputs: list[tables.InputData] = []
-        reader = csv.reader(more_input)
-        next(reader)
-        for line in reader:
-            inputs.append(tables.InputData.from_list(line))
-
-        conn.executemany(inputs[0].insert_format, inputs)
-        insert_query = f"SELECT COUNT(*) FROM {inputs[0].TABLE_NAME}"
-        count = conn.execute(insert_query).fetchone()
-        # print first column which is count
-        print(f"successfully inserted {count[0]} rows")
+    download_csv._load_from_email(db_path)
 
 
 def _model_data_with_date():
@@ -143,8 +114,8 @@ def create_app() -> AttendanceTracker:
     app.cli.add_command(init_db_cmd)  # register init-db as flask cli cmd
 
     load_db_cmd = click.Command(
-        "load-samples",
-        callback=functools.partial(_load_samples, db_path),
+        "load-from-email",
+        callback=functools.partial(_load_from_email, db_path),
     )
     app.cli.add_command(load_db_cmd)  # register data load as flask cmd
 

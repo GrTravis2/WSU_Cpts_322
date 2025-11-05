@@ -2,7 +2,10 @@
 
 from __future__ import annotations
 
+import csv
 import os
+import pathlib
+import sqlite3
 from pathlib import Path
 
 from imap_tools import (
@@ -12,28 +15,57 @@ from imap_tools import (
     MailBox,  # pyright: ignore[reportPrivateImportUsage] this is a spurious error, still gets the subpackages
 )
 
-MAIL_PASSWORD = ""
-MAIL_USERNAME = "dbkopitzke@gmail.com"
-MAIL_SERVER = "imap.gmail.com"
+import attendance_tracker.controllers.cleaner as cleaner
+import attendance_tracker.types.tables as tables
 
-DOWNLOADS_DIR = str(Path("./docs").resolve())
-DOWNLOAD_FOLDER = os.path.join(DOWNLOADS_DIR, "downloaded_csvs")
 
-if not os.path.exists(DOWNLOAD_FOLDER):
-    os.makedirs(DOWNLOAD_FOLDER)
-    print(f"Created csv download folder at {DOWNLOAD_FOLDER}")
+def _load_from_email(db_path: Path) -> None:
+    """Check the email and download csvs in raw format."""
+    mail_password = "your_app_password_here"
+    mail_username = "dbkopitzke@gmail.com"
+    mail_server = "imap.gmail.com"
 
-with MailBox(MAIL_SERVER).login(MAIL_USERNAME, MAIL_PASSWORD, "INBOX") as mailbox:
-    print("Logged in successfully")
-    for msg in mailbox.fetch(AND(subject="WSU Track")):
-        print(f"From: {msg.from_}")
-        print(f"Subject: {msg.subject}")
-        print(f"Date: {msg.date}")
-        print(f"Body: {msg.text}")
-        for att in msg.attachments:
-            print(f"Attachment: {att.filename} ({len(att.payload)} bytes)")
-            if att.filename.lower().endswith(".csv"):
-                filepath = os.path.join(DOWNLOAD_FOLDER, att.filename)
-                with open(filepath, "wb") as f:
-                    f.write(att.payload)
-                print(f"Saved attachment to {filepath}")
+    downloads_dir = str(Path("./docs").resolve())
+    download_folder = os.path.join(downloads_dir, "downloaded_csvs")
+
+    if not os.path.exists(download_folder):
+        os.makedirs(download_folder)
+        print(f"Created csv download folder at {download_folder}")
+
+    with MailBox(mail_server).login(mail_username, mail_password, "INBOX") as mailbox:
+        print("Logged in successfully")
+        for msg in mailbox.fetch(AND(subject="WSU Track")):
+            print(f"From: {msg.from_}")
+            print(f"Subject: {msg.subject}")
+            print(f"Date: {msg.date}")
+            print(f"Body: {msg.text}")
+            for att in msg.attachments:
+                print(f"Attachment: {att.filename} ({len(att.payload)} bytes)")
+                if att.filename.lower().endswith(".csv"):
+                    filepath = os.path.join(download_folder, att.filename)
+                    with open(filepath, "wb") as f:
+                        f.write(att.payload)
+                    print(f"Saved attachment to {filepath}")
+
+                    # clean the downloaded csv
+                    cleaner.clean_csv(filepath)
+
+                    # load cleaned csv into the database
+                    clean_data = pathlib.Path(
+                        "./docs/downloaded_csvs/cleaned_VCEA Clubs Access Summary by Location.csv"
+                    )
+                    with (
+                        sqlite3.connect(db_path, detect_types=sqlite3.PARSE_COLNAMES) as conn,
+                        clean_data.open("r", encoding="utf-8") as more_input,
+                    ):
+                        inputs: list[tables.InputData] = []
+                        reader = csv.reader(more_input)
+                        next(reader)
+                        for line in reader:
+                            inputs.append(tables.InputData.from_list(line))
+
+                        conn.executemany(inputs[0].insert_format, inputs)
+                        insert_query = f"SELECT COUNT(*) FROM {inputs[0].TABLE_NAME}"
+                        count = conn.execute(insert_query).fetchone()
+                        # print first column which is count
+                        print(f"successfully inserted {count[0]} rows")
