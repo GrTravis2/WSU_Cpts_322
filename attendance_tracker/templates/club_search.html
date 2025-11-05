@@ -2,13 +2,14 @@
 {% block title %} Clubs {% endblock %}
 
 {% block content %}
-<div class="main-content">
-    <table>
+<div class="flex justify-center overflow-auto" >
+    <table class="table-auto bg-white text-black text-lg border-collapse border rounded-lg" >
         <thead>
             <tr>
-                <th scope="col">Building</th>
-                <th scope="col">Room Number</th>
-                <th scope="col">Assigned Club</th>
+                <th scope="col" class="border border-black text-center p-2">Building</th>
+                <th scope="col" class="border border-black text-center p-2">Room Number</th>
+                <th scope="col" class="border border-black text-center p-2">Assigned Club</th>
+                <th scope="col" class="border border-black text-center p-2"></th>
             </tr>
         </thead>
         <tbody>
@@ -17,7 +18,7 @@
                 <th scope="row">{{building}}</th>
                 <th>{{room}}</th>
                 <th>{{club}}</th>
-                <th><a href="/h/admin/club-config/{{club}}">edit</a></th>
+                <th><a class="text-blue-600 hover:text-blue-800 transition-colors duration-200 p-4" href="{{ url_for('admin.club_config', club_name=club) }}">edit</a></th>
             </tr>
             {% endfor %}
         </tbody>
