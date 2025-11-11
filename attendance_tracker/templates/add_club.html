@@ -2,27 +2,29 @@
 
 {% block title %}Add Club Page{% endblock %}
 {% block content %}
-    <div>
-        <form method="POST" action="/h/admin/add-club">
+<div class="main-content">
+    <div class="flex justify-center mt-10">
+        <form method="POST" action="/h/admin/add-club" class="text-black">
             <label for="club_name">Club Name:</label><br>
-            <input type="text" name="club_name" id="club_name" required><br><br>
+            <input type="text" name="club_name" id="club_name" class="p-1 border border-black rounded-xl text-black" required><br><br>
 
              <label for="club_president">Club President:</label><br>
-            <input type="text" name="club_president" id="club_president" required><br><br>
+            <input type="text" name="club_president" id="club_president" class="p-1 border border-black rounded-xl text-black" required><br><br>
 
              <label for="club_email">Club Email:</label><br>
-            <input type="text" name="club_email" id="club_email" required><br><br>
+            <input type="text" name="club_email" id="club_email" class="p-1 border border-black rounded-xl text-black" required><br><br>
 
              <label for="club_size">Club Size:</label><br>
-            <input type="text" name="club_size" id="club_size" required><br><br>
+            <input type="text" name="club_size" id="club_size" class="p-1 border border-black rounded-xl text-black" required><br><br>
 
              <label for="club_advisor">Club Advisor:</label><br>
-            <input type="text" name="club_advisor" id="club_advisor" required><br><br>
+            <input type="text" name="club_advisor" id="club_advisor" class="p-1 border border-black rounded-xl text-black" required><br><br>
 
              <label for="club_advisor_email">Advisor Email:</label><br>
-            <input type="text" name="club_advisor_email" id="club_advisor_email" required><br><br>
+            <input type="text" name="club_advisor_email" id="club_advisor_email" class="p-1 border border-black rounded-xl text-black" required><br><br>
 
-            <button type="submit">Submit</button>
+            <button class="button-element bg-color" type="submit">Submit</button>
         </form>
     </div>
+</div>
 {% endblock %}

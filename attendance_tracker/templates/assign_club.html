@@ -2,18 +2,22 @@
 
 {% block title %}Assign club to room{% endblock %}
 {% block content %}
-    <div>
-        <form method="POST" action="/h/admin/assign-room-to-club">
+<div class=" main-content">
+    <div class="flex justify-center mt-10 ">
+        <form method="POST" action="/h/admin/assign-room-to-club" class="text-black ">
             <label for="building_name">Building name:</label><br>
-            <input type="text" name="building_name" id="building_name" required><br><br>
+            <input type="text" name="building_name" id="building_name" class="border border-black rounded-xl text-black" required><br><br>
 
              <label for="room_num">Room number:</label><br>
-            <input type="text" name="room_num" id="room_num" required><br><br>
+            <input type="text" name="room_num" id="room_num" class="border border-black rounded-xl text-black" required><br><br>
 
              <label for="assigned_club">Assigned club:</label><br>
-            <input type="text" name="assigned_club" id="assigned_club" required><br><br>
+            <input type="text" name="assigned_club" id="assigned_club" class="border border-black rounded-xl text-black"  required><br><br>
 
-            <button type="submit">Submit</button>
+            <button class="button-element " type="submit">Submit</button>
         </form>
+
+
+
     </div>
 {% endblock %}
