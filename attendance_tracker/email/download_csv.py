@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+import email.cleaner as cleaner
 import os
 import pathlib
 import sqlite3
@@ -15,7 +16,6 @@ from imap_tools import (
     MailBox,  # pyright: ignore[reportPrivateImportUsage] this is a spurious error, still gets the subpackages
 )
 
-import attendance_tracker.controllers.cleaner as cleaner
 import attendance_tracker.types.tables as tables
 
 

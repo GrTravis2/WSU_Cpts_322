@@ -33,7 +33,7 @@ def _init_db(db_path: pathlib.Path) -> None:
 
 def _load_from_email(db_path: pathlib.Path) -> None:
     """Check the email and download csvs, then loads them into the db."""
-    import attendance_tracker.controllers.download_csv as download_csv
+    import email.download_csv as download_csv
 
     download_csv._load_from_email(db_path)
 
