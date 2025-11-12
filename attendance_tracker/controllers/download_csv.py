@@ -19,9 +19,21 @@ import attendance_tracker.controllers.cleaner as cleaner
 import attendance_tracker.types.tables as tables
 
 
+def _check_processed(db_path: Path, uid) -> bool:
+    with sqlite3.connect(db_path) as conn:
+        # search db for uid and return if exists
+        result = conn.execute("SELECT email_id FROM email_log WHERE email_id = ?", (uid,))
+        return result.fetchone() is not None
+
+
+def _add_to_uid_db(db_path: Path, uid) -> None:
+    with sqlite3.connect(db_path) as conn:
+        conn.execute("INSERT INTO email_log (email_id) VALUES (?)", (uid,))
+
+
 def _load_from_email(db_path: Path) -> None:
     """Check the email and download csvs in raw format."""
-    mail_password = "your_app_password_here"
+    mail_password = ""
     mail_username = "dbkopitzke@gmail.com"
     mail_server = "imap.gmail.com"
 
@@ -35,13 +47,24 @@ def _load_from_email(db_path: Path) -> None:
     with MailBox(mail_server).login(mail_username, mail_password, "INBOX") as mailbox:
         print("Logged in successfully")
         for msg in mailbox.fetch(AND(subject="WSU Track")):
+            print("\n---LOADING NEW EMAIL---")
             print(f"From: {msg.from_}")
             print(f"Subject: {msg.subject}")
             print(f"Date: {msg.date}")
             print(f"Body: {msg.text}")
+
+            # skip adding to db if already added
+            if _check_processed(db_path, msg.uid):
+                print("Email Already Processed, skipping...")
+                continue
+
             for att in msg.attachments:
                 print(f"Attachment: {att.filename} ({len(att.payload)} bytes)")
                 if att.filename.lower().endswith(".csv"):
+                    # add to uid tracker
+                    _add_to_uid_db(db_path, msg.uid)
+                    print(f"Logged email UID {msg.uid} in email_log table")
+
                     filepath = os.path.join(download_folder, att.filename)
                     with open(filepath, "wb") as f:
                         f.write(att.payload)
