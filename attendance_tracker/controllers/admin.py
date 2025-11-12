@@ -7,6 +7,7 @@ import sqlite3
 import flask
 
 from attendance_tracker.controllers import auth
+from attendance_tracker.types import tables
 
 ADMIN = flask.Blueprint(
     name="admin",
@@ -31,13 +32,15 @@ def club_info() -> str:
     with flask.current_app.app_context():
         conn: sqlite3.Connection = flask.current_app.get_db()  # type: ignore
 
-    # query all the clubs here and return data view
-    # note that submitting on a target club should include URL to jump to,
-    # see base.html nav bar links, similar idea
-    # query = "SELECT BUILDING, ROOM_NUM, ASSIGNED_CLUB FROM ROOM_LOG"
-    # clubs: list[str] = conn.execute(query).fetchall()
-    conn.execute("")
-    clubs: list[tuple[str, int, str]] = [(str(i), i, str(i)) for i in range(10)]
+    query = """
+        SELECT
+            building, room_num, assigned_club
+        FROM
+            room_log
+        ORDER BY
+            building, room_num
+        """
+    clubs = conn.execute(query).fetchall()
 
     return flask.render_template(
         "club_search.html",
@@ -52,13 +55,28 @@ def club_config(club_name: str = "") -> str:
     with flask.current_app.app_context():
         conn: sqlite3.Connection = flask.current_app.get_db()  # type: ignore
 
-    # query = f"SELECT * FROM CLUB_DATA WHERE CLUB_NAME={club_name}"
+    query = """
+        SELECT
+            *
+        FROM
+            club_data
+        WHERE
+            club_name = ?
+        """
     # club = conn.execute(query).fetchone()
-    conn.execute("")
-    club = ("club", "name", "email", "size", "advisor", "advisor email")
+    dummy = tables.ClubData(
+        club_name="Crimson Robotics",
+        club_president="Derek",
+        email="email",
+        club_size=10,
+        club_advisor="Dr. Derek",
+        club_advisor_email="email",
+    )
+    club = conn.execute(query, (club_name,)).fetchone() or dummy
 
     return flask.render_template(
         "club_config.html",
+        club_name=club_name,
         club=club,
     )
 
@@ -68,20 +86,32 @@ def club_config(club_name: str = "") -> str:
 def add_club():
     """Add a club to the db."""
     if flask.request.method == "POST":
-        print(flask.request.form)  # noqa
-        # making sure all the info is getting to this route from the form
+        club = flask.request.form["club_name"]
+
+        conn: sqlite3.Connection = flask.current_app.get_db()  # type: ignore
+        cursor = conn.cursor()
+
         club_data = list(flask.request.form.values())
-        with flask.current_app.app_context():
-            conn: sqlite3.Connection = flask.current_app.get_db()  # type: ignore
-            conn.cursor().execute(
+
+        cursor.execute(
+            """SELECT CLUB_NAME
+                FROM CLUB_DATA
+                where CLUB_NAME=?""",
+            (club,),
+        )
+
+        result = cursor.fetchone()
+        if result:
+            flask.flash("Club already exists!")
+        else:
+            cursor.execute(
                 "INSERT INTO CLUB_DATA\
                 VALUES (?,?,?,?,?,?)",
                 club_data,
             )
             conn.commit()
-        # TODO: have this return to a redirected url
-
-    # back to the add form
+        location = flask.url_for("admin.club_config", club_name=club)
+        return flask.redirect(location)
     return flask.render_template("add_club.html")
 
 
@@ -90,14 +120,38 @@ def add_club():
 def assign_club():
     """Assign a room to a club."""
     if flask.request.method == "POST":
-        print(flask.request.form)
+        club = flask.request.form["assigned_club"]
+
+        conn: sqlite3.Connection = flask.current_app.get_db()  # type: ignore
+        cursor = conn.cursor()
+
         club_data = list(flask.request.form.values())
-        with flask.current_app.app_context():
-            conn: sqlite3.Connection = flask.current_app.get_db()  # type: ignore
+
+        cursor.execute(
+            """SELECT ASSIGNED_CLUB
+                FROM ROOM_LOG
+                where ASSIGNED_CLUB=?""",
+            (club,),
+        )
+
+        result = cursor.fetchone()
+
+        if result:
+            return flask.render_template("assign_club.html")
+        else:
             conn.cursor().execute(
                 "INSERT INTO ROOM_LOG\
                 VALUES (?,?,?)",
                 club_data,
             )
             conn.commit()
+        location = flask.url_for("admin.club_config", club_name=club)
+        return flask.redirect(location)
     return flask.render_template("assign_club.html")
+
+
+@ADMIN.route("/dashboard")  # type: ignore
+def admin_profile():
+    """Go to user dashboard."""
+    auth = "uid" in flask.session
+    return flask.render_template("admin_home.html", authenticated=auth)
