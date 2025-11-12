@@ -3,12 +3,12 @@
 from __future__ import annotations
 
 import csv
-import email.cleaner as cleaner
 import os
 import pathlib
 import sqlite3
 from pathlib import Path
 
+from dotenv import load_dotenv
 from imap_tools import (
     AND,  # pyright: ignore[reportPrivateImportUsage] this is a spurious error, still gets the subpackages
 )
@@ -16,7 +16,13 @@ from imap_tools import (
     MailBox,  # pyright: ignore[reportPrivateImportUsage] this is a spurious error, still gets the subpackages
 )
 
+import attendance_tracker.email.cleaner as cleaner
 import attendance_tracker.types.tables as tables
+
+
+def configure():
+    """Set up the dotenv via load_dotenv."""
+    load_dotenv()
 
 
 def _check_processed(db_path: Path, uid) -> bool:
@@ -33,9 +39,13 @@ def _add_to_uid_db(db_path: Path, uid) -> None:
 
 def _load_from_email(db_path: Path) -> None:
     """Check the email and download csvs in raw format."""
-    mail_password = ""
-    mail_username = "dbkopitzke@gmail.com"
-    mail_server = "imap.gmail.com"
+    configure()
+    mail_password = os.getenv("mail_password")
+    mail_username = os.getenv("mail_username")
+    mail_server = os.getenv("mail_server")
+
+    if not mail_password or not mail_username or not mail_server:
+        raise ValueError("Missing email credentials, add to .env file")
 
     downloads_dir = str(Path("./docs").resolve())
     download_folder = os.path.join(downloads_dir, "downloaded_csvs")
